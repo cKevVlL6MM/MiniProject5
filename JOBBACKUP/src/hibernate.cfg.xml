@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+  <property name="hibernate.connection.password">JOBEISTI</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+  <property name="hibernate.connection.username">JOBEISTI</property>
+  <mapping resource="hibernate/hbm/TableAdmin.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableClasse.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableCompte.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableEleve.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableEntreprises.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableLogin.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableMailing.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableNewsletters.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableOffres.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableSecteur.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableStatistique.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableTypesCompetence.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableTypesContrat.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableTypesNewsletter.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableUtilisateurs.hbm.xml"/>
+  <mapping class="hibernate.model.TableAdmin"/>
+  <mapping class="hibernate.model.TableEleve"/>
+  <mapping class="hibernate.model.TableEntreprises"/>
+  <mapping class="hibernate.model.TableLogin"/>
+  <mapping class="hibernate.model.TableMailing"/>
+  <mapping class="hibernate.model.TableTypesNewsletter"/>
+  <mapping class="hibernate.model.TableOffres"/>
+  <mapping class="hibernate.model.TableSecteur"/>
+  <mapping class="hibernate.model.TableClasse"/>
+  <mapping class="hibernate.model.TableNewsletters"/>
+  <mapping class="hibernate.model.TableStatistique"/>
+  <mapping class="hibernate.model.TableCompte"/>
+  <mapping class="hibernate.model.TableUtilisateurs"/>
+  <mapping class="hibernate.model.TableTypesCompetence"/>
+  <mapping class="hibernate.model.TableTypesContrat"/>
+  <mapping class="hibernate.model.UserRole"/>
+  <mapping resource="hibernate/hbm/TableUserRole.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

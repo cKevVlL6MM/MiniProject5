@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableSecteur" table="TABLE_SECTEUR" schema="JOBEISTI">
+        <id name="idtypesecteur" type="big_decimal">
+            <column name="IDTYPESECTEUR" precision="32" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomsecteur" type="string">
+            <column name="NOMSECTEUR" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableTypesNewsletter" table="TABLE_TYPES_NEWSLETTER" schema="JOBEISTI">
+        <id name="idtypenewsletter" type="big_decimal">
+            <column name="IDTYPENEWSLETTER" precision="32" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomtypenewsletter" type="string">
+            <column name="NOMTYPENEWSLETTER" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

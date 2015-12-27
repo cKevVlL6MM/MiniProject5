@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableStatistique" table="TABLE_STATISTIQUE" schema="JOBEISTI">
+        <id name="idlignestat" type="big_decimal">
+            <column name="IDLIGNESTAT" precision="32" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="datestat" type="date">
+            <column name="DATESTAT" length="7" not-null="true" />
+        </property>
+        <property name="nombreinscrits" type="big_decimal">
+            <column name="NOMBREINSCRITS" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="nombreentreprise" type="big_decimal">
+            <column name="NOMBREENTREPRISE" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="nombreeleves" type="big_decimal">
+            <column name="NOMBREELEVES" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="nombreoffres" type="big_decimal">
+            <column name="NOMBREOFFRES" precision="32" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

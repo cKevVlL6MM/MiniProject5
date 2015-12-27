@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableAdmin" table="TABLE_ADMIN" schema="JOBEISTI">
+        <id name="idadmin" type="big_decimal">
+            <column name="IDADMIN" precision="32" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="iduser" type="big_decimal">
+            <column name="IDUSER" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="nom" type="string">
+            <column name="NOM" length="100" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="PRENOM" length="100" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" not-null="true" />
+        </property>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="25" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.UserRole" table="USER_ROLE" schema="JOBEISTI">
+       <composite-id>
+       <key-property name="iduser"></key-property>
+           <key-property name="roles"></key-property>
+            
+       </composite-id>
+        <property name="iduser" type="big_decimal">
+            <column name="IDUSER" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="roles" type="string">
+            <column name="ROLES" length="100" not-null="true" />
+        </property>
+      
+    </class>
+</hibernate-mapping>

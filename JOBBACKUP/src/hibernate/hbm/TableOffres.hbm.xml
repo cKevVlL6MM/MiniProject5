@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 d?c. 2015 18:38:09 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableOffres" table="TABLE_OFFRES" schema="JOBEISTI">
+        <id name="idoffre" type="big_decimal">
+            <column name="IDOFFRE" precision="32" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="identreprise" type="big_decimal">
+            <column name="IDENTREPRISE" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="idtypecontrat" type="big_decimal">
+            <column name="IDTYPECONTRAT" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="idtypesecteur" type="big_decimal">
+            <column name="IDTYPESECTEUR" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="idtypecompetence" type="big_decimal">
+            <column name="IDTYPECOMPETENCE" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="idniveauminimum" type="big_decimal">
+            <column name="IDNIVEAUMINIMUM" precision="32" scale="0" not-null="true" />
+        </property>
+        <property name="titreoffre" type="string">
+            <column name="TITREOFFRE" length="250" not-null="true" />
+        </property>
+        <property name="contenu" type="string">
+            <column name="CONTENU" length="4000" not-null="true" />
+        </property>
+        <property name="datepublication" type="date">
+            <column name="DATEPUBLICATION" length="7" not-null="true" />
+        </property>
+        <property name="dureeoffre" type="date">
+            <column name="DUREEOFFRE" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>
