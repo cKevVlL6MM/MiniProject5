@@ -44,7 +44,7 @@
 							<div class="col-lg-12">
 								<form id="login-form" action="SignIn" method="post" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" value="Identifiant" value="">
+										<input type="text" name="identifiant" id="identifiant" tabindex="1" class="form-control" value="Identifiant" value="">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" value="Mot de passe">

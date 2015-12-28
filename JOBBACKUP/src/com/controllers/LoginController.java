@@ -29,12 +29,16 @@ import hibernate.model.*;
 
 public class LoginController {
 	
+	private static final String roleEleve ="6mww5lakiz8w69yoswzb";
+	private static final String roleEntreprise="ra2mqscru3i95k55cfne";
+	private static final String roleAdmin="cgo9dbyvqmsrl8m72jvw";
+	
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
 	
 	
 	
-	public static String CheckRole(BigDecimal id) 
+	public static String CheckRole(String identifiant, String mdp) 
 	
 	{
 		SessionFactory sf =  HibernateUtil.getSessionFactory();
@@ -42,12 +46,51 @@ public class LoginController {
 		Session sessions= sf.openSession();
 		//Query query = sessions.getNamedQuery("LISTE_LOGINS");
 		
-		Query query=sessions.createQuery("from UserRole where IDUSER=:tags").setParameter("tags", id);
-		UserRole res = (UserRole) query.list().get(0);
 		
 		
 		
-		return res.getRoles();
+			//HQL ne support pas les jointures entre deux tables externes
+		Query query=sessions.createSQLQuery("select r.* from Table_Login l LEFT JOIN User_Role r on l.IDUSER=r.IDUSER Where identifiant = :ide and password = :pwd")
+				.addEntity(UserRole.class)
+				.setParameter("ide", identifiant)
+				.setParameter("pwd", mdp);
+		//Query query=sessions.createSQLQuery("select r.* from User_Role r left join Table_Login tl on r.IDUSER=tl.IDUSER ").addEntity(UserRole.class);
+		UserRole ur = new UserRole();
+		//TableLogin tl = new TableLogin();
+		
+		System.out.println(query.list().size());
+		
+		
+		if(!query.list().isEmpty())
+		{
+			System.out.println(query.list().get(0));
+		//System.out.println(query.list().get(0).toString());
+			//ur = (UserRole) query.list().get(0);
+			UserRole res =  (UserRole) query.list().get(0);
+			return res.getRoles();
+		}
+		/*
+			for(int i=0; i<query.list().size();i++)
+			{
+			tl = (TableLogin) query.list().get(i);
+		
+		
+		if(tl.getIdentifiant().equals(identifiant) && tl.getPassword().equals(mdp))
+		{
+			query=sessions.createQuery("from UserRole where iduser = :ide").setParameter("ide", tl.getIduser());
+			ur = (UserRole) query.list().get(0);			
+			return ur.getId().getRoles();
+		}
+			}
+		
+		}
+		
+		*/
+		
+		
+		
+		
+			return "invalid";
 		
 		
 	
@@ -56,28 +99,75 @@ public class LoginController {
 		
 	}
 	
+	public static BigDecimal CheckValidity(String pId, String pPwd)
+	{
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session sessions = sf.openSession();
+		TableLogin res=new TableLogin();
+		
+		
+		Query query=sessions.createSQLQuery("from TableLogin where (identifiant=:tags and password=:pwd)").setParameter("tags", pId).setParameter("pwd", pPwd);
+		if(!query.list().isEmpty())
+		{
+		 res = (TableLogin) query.list().get(0);
+		}
+		return res.getIduser();
+		
+		
+		
+	}
+	
+	
+	
+public static String Redirect(String role)
+
+
+{
+	System.out.println(role);
+	if(role.equals(roleEleve))
+	{
+		return "AccueilEleve";
+	}
+	else if(role.equals(roleEntreprise))
+	{
+		return "AccueilEntreprise";
+	}
+	else if(role.equals(roleAdmin))
+	{
+		return "AccueilAdmin";
+	}
+	else 
+	{
+		return "Login";
+	}
+	
+	
+	
+}
+	
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public static String Proceed(@ModelAttribute("SignIn") TableLogin logins, ModelMap model)
 	{
 		model.addAttribute("SignIn", logins);
-		int EnteredId=Integer.valueOf(logins.getIdentifiant());
+		
+		String EnteredId=logins.getIdentifiant();
 		String EnteredPassword=logins.getPassword();
-		BigDecimal cId = new BigDecimal(EnteredId);
 		
 		
-		Boolean isValid=false;
-		String Result = CheckRole(cId) ;
+		System.out.println(EnteredId);
+		System.out.println(EnteredPassword);
+		
+		String Result = CheckRole(EnteredId,EnteredPassword) ;
+		
 		
 		
 			
-			System.out.println(Result) ;
-			
 		
 		
 		
-		return  Result;
+		return  Redirect(Result);
 		
 		
 		

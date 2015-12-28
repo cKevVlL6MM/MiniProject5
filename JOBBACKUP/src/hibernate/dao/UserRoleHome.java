@@ -1,7 +1,6 @@
 package hibernate.dao;
-import hibernate.model.*; 
-// Generated 20 dÃ©c. 2015 18:42:20 by Hibernate Tools 4.0.0.Final
- 
+// Generated 28 déc. 2015 16:23:36 by Hibernate Tools 4.0.0.Final
+
 import java.util.List;
 import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
@@ -10,9 +9,11 @@ import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import hibernate.model.UserRole;
+
 /**
  * Home object for domain model class UserRole.
- * @see hibernate.dao.UserRole
+ * @see hibernate.model.UserRole
  * @author Hibernate Tools
  */
 public class UserRoleHome {
@@ -86,10 +87,10 @@ public class UserRoleHome {
 		}
 	}
 
-	public UserRole findById(UserRole id) {
+	public UserRole findById(java.math.BigDecimal id) {
 		log.debug("getting UserRole instance with id: " + id);
 		try {
-			UserRole instance = (UserRole) sessionFactory.getCurrentSession().get("hibernate.dao.UserRole", id);
+			UserRole instance = (UserRole) sessionFactory.getCurrentSession().get("hibernate.model.UserRole", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -105,7 +106,7 @@ public class UserRoleHome {
 	public List findByExample(UserRole instance) {
 		log.debug("finding UserRole instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("hibernate.dao.UserRole")
+			List results = sessionFactory.getCurrentSession().createCriteria("hibernate.model.UserRole")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
