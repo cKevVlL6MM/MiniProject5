@@ -58,12 +58,12 @@ public class LoginController {
 		UserRole ur = new UserRole();
 		//TableLogin tl = new TableLogin();
 		
-		System.out.println(query.list().size());
+		//System.out.println(query.list().size());
 		
 		
 		if(!query.list().isEmpty())
 		{
-			System.out.println(query.list().get(0));
+			//System.out.println(query.list().get(0));
 		//System.out.println(query.list().get(0).toString());
 			//ur = (UserRole) query.list().get(0);
 			UserRole res =  (UserRole) query.list().get(0);
@@ -123,7 +123,7 @@ public static String Redirect(String role)
 
 
 {
-	System.out.println(role);
+	//System.out.println(role);
 	if(role.equals(roleEleve))
 	{
 		return "AccueilEleve";
