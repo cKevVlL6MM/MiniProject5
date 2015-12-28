@@ -156,8 +156,7 @@ public static String Redirect(String role)
 		String EnteredPassword=logins.getPassword();
 		
 		
-		System.out.println(EnteredId);
-		System.out.println(EnteredPassword);
+		
 		
 		String Result = CheckRole(EnteredId,EnteredPassword) ;
 		

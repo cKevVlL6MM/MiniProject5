@@ -73,13 +73,19 @@
 <section class="container" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div class="col-lg-4 text-center">
                  <img src="<c:url value="img/LOGO.png"/>" class="img-responsive" alt="">
                     <h2 class="section-heading">Votre passerelle vers le monde du travail </h2>
                     <hr class="light">
                     
                     
                 </div>
+                <div class="col-lg-8 ">
+               Réservé : liste actualités et evènements 
+                    
+                    
+                </div>
+               
             </div>
         </div>
     </section>
