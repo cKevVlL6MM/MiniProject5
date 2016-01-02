@@ -927,6 +927,29 @@ public class AnnoncesController {
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
+		else if(to==null && inm!=-1 && itc !=-1 && its!= -1 && dc != null && dd != null)
+		{
+			
+			
+			
+		
+			BigDecimal binm = convertIntToBD(inm);
+			BigDecimal bitc = convertIntToBD(itc);
+			BigDecimal bits = convertIntToBD(its);
+			
+			
+			Query query=sessions.createSQLQuery("select * from Table_offres where DUREEOFFRE = :dd and DATEPUBLICATION = :dc and IDTYPESECTEUR = :its and IDTYPECONTRAT = :itc and IDNIVEAUMINIMUM = :inm ")
+					.addEntity(TableOffres.class)
+					.setParameter("inm", binm)
+					.setParameter("dc", dc)
+					.setParameter("dd",dd)
+					.setParameter("its", bits)
+					.setParameter("itc", bitc);
+			
+				
+					
+					listeOffres= fill  (query.<TableOffres>list());	
+		}
 		else if(to!=null && inm!=-1 && itc !=-1 && its!= -1 && dc == null && dd != null)
 		{
 			
@@ -1042,6 +1065,11 @@ public class AnnoncesController {
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
+		}
+		else
+		{
+			//faut mettre une offre vide ici
+			listeOffres=null;
 		}
 		
 		
