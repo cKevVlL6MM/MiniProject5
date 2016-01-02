@@ -3,7 +3,10 @@ package com.controllers;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -38,9 +41,10 @@ public class LoginController {
 	
 	
 	
-	public static String CheckRole(String identifiant, String mdp) 
+	public static String CheckRole(String identifiant, String mdp,HttpServletRequest request) 
 	
 	{
+		
 		SessionFactory sf =  HibernateUtil.getSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
 		Session sessions= sf.openSession();
@@ -49,43 +53,29 @@ public class LoginController {
 		
 		
 		
-			//HQL ne support pas les jointures entre deux tables externes
+			//HQL ne supporte pas les jointures entre deux tables externes
 		Query query=sessions.createSQLQuery("select r.* from Table_Login l LEFT JOIN User_Role r on l.IDUSER=r.IDUSER Where identifiant = :ide and password = :pwd")
 				.addEntity(UserRole.class)
 				.setParameter("ide", identifiant)
 				.setParameter("pwd", mdp);
-		//Query query=sessions.createSQLQuery("select r.* from User_Role r left join Table_Login tl on r.IDUSER=tl.IDUSER ").addEntity(UserRole.class);
-		UserRole ur = new UserRole();
-		//TableLogin tl = new TableLogin();
 		
-		//System.out.println(query.list().size());
 		
 		
 		if(!query.list().isEmpty())
 		{
-			//System.out.println(query.list().get(0));
-		//System.out.println(query.list().get(0).toString());
-			//ur = (UserRole) query.list().get(0);
+			
+			
+		
+			
 			UserRole res =  (UserRole) query.list().get(0);
+			request.getSession().setAttribute("UserId", res.getIduser());
+			
+			
+			
+			
 			return res.getRoles();
 		}
-		/*
-			for(int i=0; i<query.list().size();i++)
-			{
-			tl = (TableLogin) query.list().get(i);
 		
-		
-		if(tl.getIdentifiant().equals(identifiant) && tl.getPassword().equals(mdp))
-		{
-			query=sessions.createQuery("from UserRole where iduser = :ide").setParameter("ide", tl.getIduser());
-			ur = (UserRole) query.list().get(0);			
-			return ur.getId().getRoles();
-		}
-			}
-		
-		}
-		
-		*/
 		
 		
 		
@@ -148,7 +138,7 @@ public static String Redirect(String role)
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public static String Proceed(@ModelAttribute("SignIn") TableLogin logins, ModelMap model)
+	public static String Proceed(@ModelAttribute("SignIn") TableLogin logins, ModelMap model,HttpServletRequest request)
 	{
 		model.addAttribute("SignIn", logins);
 		
@@ -158,7 +148,7 @@ public static String Redirect(String role)
 		
 		
 		
-		String Result = CheckRole(EnteredId,EnteredPassword) ;
+		String Result = CheckRole(EnteredId,EnteredPassword,request) ;
 		
 		
 		
@@ -171,6 +161,9 @@ public static String Redirect(String role)
 		
 		
 	}
+	
+	
+	
 	
 	
 	

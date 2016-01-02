@@ -65,4 +65,12 @@ public class NewsletterController {
 		}
 		
 	}
+	@RequestMapping(method = RequestMethod.GET)
+	public static String loginRedirect() {
+		
+		
+		return "Login";
+	}
+	
+	
 }
