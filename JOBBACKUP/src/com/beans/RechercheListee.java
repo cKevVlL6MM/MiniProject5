@@ -12,6 +12,7 @@ public class RechercheListee {
 	private String nomSecteur;
 	private String nomCompetence;
 	private String nomTypeContrat;
+	private String nomClasse;
 	
 	public TableEntreprises getEnterprise() {
 		return enterprise;
@@ -49,6 +50,12 @@ public class RechercheListee {
 	public String Adresse()
 	{
 		return this.enterprise.getAdresse()+" "+this.enterprise.getCodepostal();
+	}
+	public String getNomClasse() {
+		return nomClasse;
+	}
+	public void setNomClasse(String nomClasse) {
+		this.nomClasse = nomClasse;
 	}
 	
 	

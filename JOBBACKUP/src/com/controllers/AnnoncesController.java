@@ -22,9 +22,12 @@ import com.beans.HibernateUtil;
 import com.beans.Recherche;
 import com.beans.RechercheListee;
 
+import hibernate.model.TableClasse;
+import hibernate.model.TableEntreprises;
 import hibernate.model.TableLogin;
 import hibernate.model.TableOffres;
 import hibernate.model.TableSecteur;
+import hibernate.model.TableTypesContrat;
 import hibernate.model.UserRole;
 
 
@@ -1068,8 +1071,152 @@ public class AnnoncesController {
 		}
 		else
 		{
-			//faut mettre une offre vide ici
+			//faut mettre une offre vide ici en gros titre offre = aucune annonce
 			listeOffres=null;
+		}
+		
+		
+		if( listeOffres != null && !listeOffres.isEmpty() )
+		{
+			
+			
+			
+			
+		int nombreOffres = listeOffres.size();
+		
+		// On remplit la arraylist recherchelistee
+		
+		for(int r=0;r<nombreOffres;r++)
+		{
+			RechercheListee a = new RechercheListee();
+			a.setOffre(listeOffres.get(r));
+			listeAnnonces.add(a);
+		   
+		}
+		
+		
+		
+		
+		
+		
+		// les Identreprises des offres trouvées sont stockées là
+		BigDecimal[] ArrayIDE = new BigDecimal[nombreOffres];
+		
+		//array des idtypesecteurs des offres
+		BigDecimal[] ArrayIDS = new BigDecimal[nombreOffres];
+		
+		//array des idtypesContrat cf schéma mld
+		BigDecimal[] ArrayIDC = new BigDecimal[nombreOffres];
+		
+		//array des idniveauminimum
+		BigDecimal[] ArrayINM = new BigDecimal[nombreOffres];
+		
+		
+		//on remplit les array des id, nous chercherons à trouver les noms des secteurs d'activité à partir des idtypesecteur
+		for(int i=0; i<nombreOffres; i++)
+		{
+			ArrayIDE[i]=listeOffres.get(i).getIdentreprise();
+			ArrayIDS[i]=listeOffres.get(i).getIdtypesecteur();
+			ArrayIDC[i]=listeOffres.get(i).getIdtypecontrat();
+			ArrayINM[i]=listeOffres.get(i).getIdniveauminimum();
+		}
+		
+		Query queryIDE = sessions.createQuery("FROM TableEntreprises where IDENTREPRISE IN :ide ").setParameterList("ide", ArrayIDE);
+		
+		//on vérifie toujours qu'on manipule des listes non vides 
+		if(!queryIDE.list().isEmpty())
+		{
+			
+			for(int j=0; j<queryIDE.list().size(); j++)
+			{
+				RechercheListee b = new RechercheListee();
+				if(j<listeAnnonces.size())
+				{
+					b=listeAnnonces.get(j);
+					TableEntreprises te = (TableEntreprises) queryIDE.list().get(j);
+					b.setEnterprise(te);
+					listeAnnonces.set(j, b);
+					
+					
+				}
+								
+			}
+				
+			
+		}
+		
+		Query queryIDS = sessions.createQuery("FROM TableSecteur where IDTYPESECTEUR IN :ids ").setParameterList("ids", ArrayIDS);
+		
+		if(!queryIDS.list().isEmpty())
+		{
+			
+			for(int l=0; l<queryIDS.list().size(); l++)
+			{
+				RechercheListee b2 = new RechercheListee();
+				if(l<listeAnnonces.size())
+				{
+					b2=listeAnnonces.get(l);
+					TableSecteur ts = (TableSecteur) queryIDS.list().get(l);
+					
+					String NomSecteur = ts.getNomsecteur();
+					b2.setNomSecteur(NomSecteur);
+					listeAnnonces.set(l, b2);
+					
+					
+				}
+								
+			}
+				
+			
+		}
+		
+		Query queryIDC = sessions.createQuery("FROM TableTypesContrat where Idtypecontrat IN :idc ").setParameterList("idc", ArrayIDC);
+		
+		if(!queryIDC.list().isEmpty())
+		{
+			
+			for(int m=0; m<queryIDC.list().size(); m++)
+			{
+				RechercheListee b3 = new RechercheListee();
+				if(m<listeAnnonces.size())
+				{
+					b3=listeAnnonces.get(m);
+					TableTypesContrat ttc = (TableTypesContrat)  queryIDC.list().get(m);
+					
+					String NomTypeContrat = ttc.getNomtypecontrat();
+					b3.setNomTypeContrat(NomTypeContrat);
+					listeAnnonces.set(m, b3);
+					
+					
+				}
+								
+			}
+				
+			
+		}
+		Query queryINM = sessions.createQuery("FROM TableClasse where IDCLASSE IN :inm ").setParameterList("inm", ArrayINM);
+		
+		if(!queryINM.list().isEmpty())
+		{
+			
+			for(int n=0; n<queryINM.list().size(); n++)
+			{
+				RechercheListee b4 = new RechercheListee();
+				if(n<listeAnnonces.size())
+				{
+					b4=listeAnnonces.get(n);
+					TableClasse tcl = (TableClasse) queryINM.list().get(n);
+					
+					String NomClasse = tcl.getNomclasse();
+					b4.setNomClasse(NomClasse);
+					listeAnnonces.set(n, b4);
+					
+					
+				}
+								
+			}
+				
+			
 		}
 		
 		
@@ -1078,25 +1225,13 @@ public class AnnoncesController {
 		
 		
 		
-			
+					
+		}
 		
 		
 		
 		
-		
-		
-		
-		
-		
-			
-			
-			
-		
-		
-		
-	
-		
-		return new ModelAndView("annonces");
+		return new ModelAndView("annonces","listeAnnonces",listeAnnonces);
 	}
 	
 	public static BigDecimal convertIntToBD(int integer)
