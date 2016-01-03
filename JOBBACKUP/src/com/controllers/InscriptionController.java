@@ -29,6 +29,10 @@ import hibernate.model.*;
 @RequestMapping(value="/registration")
 public class InscriptionController  {
 	
+	public static BigDecimal convertIntToBD(int integer)
+    {
+     return  new BigDecimal( (double)integer );
+    }
 	
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
@@ -50,8 +54,10 @@ public class InscriptionController  {
 		System.out.println("age : "+user.getAge());
 		System.out.println("telephone : "+user.getTelephone());
 		System.out.println("classe : "+user.getClasse());
+		System.out.println("email :"+user.getEmail());
+		System.out.println("civilite"+user.getCivilite());
 		
-		if((user.getIdentifiant()=="")||(user.getPassword()=="")||(user.getNom()=="")||(user.getClasse()=="")||(user.getPrenom()=="")){
+		if((user.getIdentifiant()=="")||(user.getPassword()=="")||(user.getNom()=="")||(user.getPrenom()=="")){
 			
 		}
 		
@@ -83,17 +89,17 @@ public class InscriptionController  {
 			SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 			//SessionFactory sessionFactory = createSessionFactory();
 			Session sessions= sf.openSession();
-			Query query=sessions.getNamedQuery("creer_eleve");
+			Query query=sessions.createSQLQuery("call CREER_ELEVE(:pNOM,:pPRENOM,:pIDCLASSE,:pCIVILITE,:pAGE,:pTELEPHONE,:pEMAIL,:pIDENTIFIANT,:pMOTDEPASSE)");
 			query.setParameter("pNOM", user.getNom());		
 			query.setParameter("pPRENOM", user.getPrenom());
-			query.setParameter("pIDCLASSE",classe);
+			query.setParameter("pIDCLASSE",convertIntToBD(classe));
 			query.setParameter("pCIVILITE", user.getCivilite());
 			query.setParameter("pAGE", user.getAge());
 			query.setParameter("pTELEPHONE", user.getTelephone());
 			query.setParameter("pEMAIL", user.getEmail());
 			query.setParameter("pIDENTIFIANT",user.getIdentifiant());
 			query.setParameter("pMOTDEPASSE", user.getPassword());
-			List list=query.list();
+			query.executeUpdate();
 			sessions.close();	
 		
 		}

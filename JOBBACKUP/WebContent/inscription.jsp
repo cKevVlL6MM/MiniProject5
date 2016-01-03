@@ -10,8 +10,14 @@
 <form method="post" action="registration" >
 Identifiant : <input type="text" name="identifiant" required/><br/>
 Mot de passe : <input type="password" name="password" required/><br/>
+Email : <input type="text" name="email" required/><br/>
 Nom : <input type="text" name="nom" required/><br/>
 Prenom : <input type="text" name="prenom" required/><br/>
+Civilite : <SELECT name="civilite" size=1 required>
+<option>M.
+<option>Mme
+<option>Mlle
+</SELECT><br/>
 Age : <input type="text" name="age"/><br/>
 Telephone : <input type="text" name="telephone"/><br/>
 Classe : <SELECT name="classe" size="1" required>
