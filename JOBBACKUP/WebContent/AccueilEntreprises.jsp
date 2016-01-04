@@ -135,7 +135,7 @@
                                     Annonces
                                 </div>
                                 <div class="project-name">
-                                   Consulter les annonces
+                                   Consulter mes annonces
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                     MyJOBEisti
                                 </div>
                                 <div class="project-name">
-                                   Consultez vos annonces archivées
+                                   Ajouter des documents
                                 </div>
                             </div>
                         </div>

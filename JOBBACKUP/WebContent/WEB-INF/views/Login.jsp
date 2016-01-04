@@ -69,24 +69,24 @@
 								<form id="register-form" action="registration" method="post" style="display: none;">
 									<div class="form-group">
 									<label for="username">Identifiant</label>
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" value="Identifiant" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control">
 									</div>
 									
 									<div class="form-group">
 									<label for="password">mot de passe</label>
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" value="mot de passe">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control">
 									</div>
 									<div class="form-group">
 									<label for="confirm-password">Confirmer mot de passe</label>
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" value="">
+										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control">
 									</div>
 									<div class="form-group">
 									<label for="email">E-mail</label>
-										<input type="text" name="email" id="email" tabindex="1" class="form-control" value="E-mail" value="">
+										<input type="text" name="email" id="email" tabindex="1" class="form-control">
 									</div>
 									<div class="form-group">
 									<label for="Téléphone">Téléphone</label>
-										<input type="text" name="telephone" id="telephone" tabindex="1" class="form-control" value="Telephone" value="">
+										<input type="text" name="telephone" id="telephone" tabindex="1" class="form-control">
 									</div>
 									<div class="form-group">
 		<label for="myButtons">Type de compte :</label>						

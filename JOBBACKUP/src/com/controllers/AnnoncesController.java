@@ -99,6 +99,12 @@ public class AnnoncesController {
 		
 		
 		String to = search.getTitreoffre();
+		if(to.equals("") || to==null )
+		{
+			to=null;
+		}
+		
+		
 		int inm = search.getIdniveauminimum();
 		inm=-1;
 		int itc = search.getIdtypecontrat();
@@ -123,7 +129,7 @@ public class AnnoncesController {
 			System.out.println("inside");
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to ")
 			.addEntity(TableOffres.class)
-			.setParameter("to","%"+to+"%");
+			.setParameter("to",to);
 			
 			
 			/*
@@ -230,7 +236,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE  = :to and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("inm", bits);
+					.setParameter("its", bits);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 			
@@ -1130,9 +1136,12 @@ public class AnnoncesController {
 		//on remplit les array des id, nous chercherons � trouver les noms des secteurs d'activit� � partir des idtypesecteur
 		for(int i=0; i<nombreOffres; i++)
 		{
+			
 			ArrayIDE[i]=listeOffres.get(i).getIdentreprise();
+			System.out.println("identreprise "+ArrayIDE[i].toString());
 			ArrayIDS[i]=listeOffres.get(i).getIdtypesecteur();
 			ArrayIDC[i]=listeOffres.get(i).getIdtypecontrat();
+			System.out.println("identreprise "+ArrayIDE[i].toString());
 			ArrayINM[i]=listeOffres.get(i).getIdniveauminimum();
 		}
 		
@@ -1145,15 +1154,16 @@ public class AnnoncesController {
 			for(int j=0; j<queryIDE.list().size(); j++)
 			{
 				RechercheListee b = new RechercheListee();
-				if(j<listeAnnonces.size())
-				{
+			
 					b=listeAnnonces.get(j);
 					TableEntreprises te = (TableEntreprises) queryIDE.list().get(j);
 					b.setEnterprise(te);
+					
+					
 					listeAnnonces.set(j, b);
 					
 					
-				}
+				
 								
 			}
 				
@@ -1243,8 +1253,7 @@ public class AnnoncesController {
 					
 		}
 		
-		
-		
+	
 		
 		return new ModelAndView("annonces","listeAnnonces",listeAnnonces);
 	}

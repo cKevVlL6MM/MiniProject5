@@ -18,7 +18,7 @@ public class ProfileUtilisateur {
 	private static final String roleEntreprise="ra2mqscru3i95k55cfne";
 	private static final String roleAdmin="cgo9dbyvqmsrl8m72jvw";
 
-	// par mesure de s�curit� les info de login ne sont pas stock�es dans une instance de cette classe
+	// par mesure de securite les info de login ne sont pas stock�es dans une instance de cette classe
 	private TableUtilisateurs userInfo;
 	private TableEleve EleveInfo = null;
 	private TableEntreprises EntrepriseInfo = null;
