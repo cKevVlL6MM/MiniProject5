@@ -16,9 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.math.BigDecimal;
 
 import com.beans.HibernateUtil;
+import com.beans.ProfileUtilisateur;
 import com.beans.Recherche;
 import com.beans.RechercheListee;
 
@@ -65,10 +69,20 @@ public class AnnoncesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public static String doGet()
+	public static String doGet(HttpServletRequest request)
 	{
-		return "annonces";
-	}
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		
+		if(pl.isAdmin() || pl.isEleve() || pl.isEnterprise())
+		{
+			return "annonces";
+		}
+		else
+		{
+			return "Login";
+		}
+		}
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public static ModelAndView checkRecherche(@ModelAttribute("annonces") Recherche search, ModelMap model){
@@ -97,7 +111,7 @@ public class AnnoncesController {
 		ArrayList<TableOffres> listeOffres = new ArrayList<TableOffres>();
 		
 		
-		/* en fonction des champs renseignés, la requete SQL changera, nous avons 5 paramètres de recherche */
+		/* en fonction des champs renseignï¿½s, la requete SQL changera, nous avons 5 paramï¿½tres de recherche */
 		
 		if(to == null && inm==-1 && itc ==-1 && its == -1 && dc == null && dd == null )
 		{
@@ -1072,6 +1086,7 @@ public class AnnoncesController {
 		else
 		{
 			//faut mettre une offre vide ici en gros titre offre = aucune annonce
+			//System.out.println("inside else");
 			listeOffres=null;
 		}
 		
@@ -1099,20 +1114,20 @@ public class AnnoncesController {
 		
 		
 		
-		// les Identreprises des offres trouvées sont stockées là
+		// les Identreprises des offres trouvï¿½es sont stockï¿½es lï¿½
 		BigDecimal[] ArrayIDE = new BigDecimal[nombreOffres];
 		
 		//array des idtypesecteurs des offres
 		BigDecimal[] ArrayIDS = new BigDecimal[nombreOffres];
 		
-		//array des idtypesContrat cf schéma mld
+		//array des idtypesContrat cf schï¿½ma mld
 		BigDecimal[] ArrayIDC = new BigDecimal[nombreOffres];
 		
 		//array des idniveauminimum
 		BigDecimal[] ArrayINM = new BigDecimal[nombreOffres];
 		
 		
-		//on remplit les array des id, nous chercherons à trouver les noms des secteurs d'activité à partir des idtypesecteur
+		//on remplit les array des id, nous chercherons ï¿½ trouver les noms des secteurs d'activitï¿½ ï¿½ partir des idtypesecteur
 		for(int i=0; i<nombreOffres; i++)
 		{
 			ArrayIDE[i]=listeOffres.get(i).getIdentreprise();
@@ -1123,7 +1138,7 @@ public class AnnoncesController {
 		
 		Query queryIDE = sessions.createQuery("FROM TableEntreprises where IDENTREPRISE IN :ide ").setParameterList("ide", ArrayIDE);
 		
-		//on vérifie toujours qu'on manipule des listes non vides 
+		//on vï¿½rifie toujours qu'on manipule des listes non vides 
 		if(!queryIDE.list().isEmpty())
 		{
 			

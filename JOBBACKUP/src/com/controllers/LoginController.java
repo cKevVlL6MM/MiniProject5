@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.HibernateUtil;
+import com.beans.ProfileUtilisateur;
 import com.beans.Registration;
 
 import hibernate.model.*;
@@ -35,6 +36,8 @@ public class LoginController {
 	private static final String roleEleve ="6mww5lakiz8w69yoswzb";
 	private static final String roleEntreprise="ra2mqscru3i95k55cfne";
 	private static final String roleAdmin="cgo9dbyvqmsrl8m72jvw";
+	private static BigDecimal UserId;
+	
 	
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
@@ -50,10 +53,8 @@ public class LoginController {
 		Session sessions= sf.openSession();
 		//Query query = sessions.getNamedQuery("LISTE_LOGINS");
 		
-		
-		
-		
-			//HQL ne supporte pas les jointures entre deux tables externes
+
+			//HQL ne supporte pas les jointures entre deux tables externes nous utiliserons des requêtes SQL.
 		Query query=sessions.createSQLQuery("select r.* from Table_Login l LEFT JOIN User_Role r on l.IDUSER=r.IDUSER Where identifiant = :ide and password = :pwd")
 				.addEntity(UserRole.class)
 				.setParameter("ide", identifiant)
@@ -68,7 +69,13 @@ public class LoginController {
 		
 			
 			UserRole res =  (UserRole) query.list().get(0);
-			request.getSession().setAttribute("UserId", res.getIduser());
+			setUserId(res.getIduser());
+			
+			
+			
+			
+			
+			//request.getSession().setAttribute("UserId", res.getIduser());
 			
 			
 			
@@ -89,45 +96,49 @@ public class LoginController {
 		
 	}
 	
-	public static BigDecimal CheckValidity(String pId, String pPwd)
-	{
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session sessions = sf.openSession();
-		TableLogin res=new TableLogin();
-		
-		
-		Query query=sessions.createSQLQuery("from TableLogin where (identifiant=:tags and password=:pwd)").setParameter("tags", pId).setParameter("pwd", pPwd);
-		if(!query.list().isEmpty())
-		{
-		 res = (TableLogin) query.list().get(0);
-		}
-		return res.getIduser();
-		
-		
-		
-	}
 	
 	
 	
-public static String Redirect(String role)
+public static String Redirect(String role, HttpServletRequest request)
 
 
 {
+	TableUtilisateurs tu = ProfileUtilisateur.getTableUtilisateur(getUserId());
+	
+	
 	//System.out.println(role);
 	if(role.equals(roleEleve))
 	{
+		
+		ProfileUtilisateur profilEleve = new ProfileUtilisateur(tu,role);
+		
+		
+		request.getSession().setAttribute("profileutilisateur", profilEleve);
+		
+		
+		
+		
+		
 		return "AccueilEleve";
 	}
 	else if(role.equals(roleEntreprise))
 	{
+		ProfileUtilisateur profilEntreprise = new ProfileUtilisateur(tu,role);
+		
+		request.getSession().setAttribute("profileutilisateur",profilEntreprise);
+		
 		return "AccueilEntreprise";
 	}
 	else if(role.equals(roleAdmin))
 	{
+		ProfileUtilisateur profilAdmin = new ProfileUtilisateur(tu,role);
+		request.getSession().setAttribute("profileutilisateur", profilAdmin);
+		
 		return "AccueilAdmin";
 	}
 	else 
 	{
+		
 		return "Login";
 	}
 	
@@ -156,10 +167,24 @@ public static String Redirect(String role)
 		
 		
 		
-		return  Redirect(Result);
+		return  Redirect(Result,request);
 		
 		
 		
+	}
+
+
+
+
+	private static BigDecimal getUserId() {
+		return UserId;
+	}
+
+
+
+
+	private static void setUserId(BigDecimal userId) {
+		UserId = userId;
 	}
 	
 	

@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand pull-right" href="#">Accueil</a>
+                <a class="navbar-brand pull-right" href="Accueil">Accueil</a>
             </div>
            
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -127,7 +127,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="annonces" class="portfolio-box">
                         <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
