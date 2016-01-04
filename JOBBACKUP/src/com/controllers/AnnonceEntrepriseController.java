@@ -26,10 +26,11 @@ public class AnnonceEntrepriseController {
      return  new BigDecimal( (double)integer );
     }
 	
-	@RequestMapping(value="/annonceController",method = RequestMethod.POST)
+	@RequestMapping(value="/creerAnnonceController",method = RequestMethod.POST)
 	protected void creerAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
 		model.addAttribute("tableoffres", offre);
+		@SuppressWarnings("deprecation")
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
 		Session sessions= sf.openSession();
@@ -44,8 +45,26 @@ public class AnnonceEntrepriseController {
 		query.setParameter("pDUREEOFFRE", offre.getDureeoffre());
 		query.executeUpdate();
 		sessions.close();	
+				
+	}	
 		
-
-		
+	@RequestMapping(value="/modifierAnnonceController",method = RequestMethod.POST)
+	protected String modifierAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+		request.setAttribute("modif"+request.getAttribute("valeur"),1 );
+		return "MesAnnonces";
 	}
+	
+	@RequestMapping(value="/modifAnnonceController",method = RequestMethod.POST)
+	protected void modifAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		model.addAttribute("tableoffres", offre);
+		@SuppressWarnings("deprecation")
+		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+		//SessionFactory sessionFactory = createSessionFactory();
+		Session sessions= sf.openSession();
+		Query query=sessions.createSQLQuery("update TABLE_OFFRES set TITREOFFRE='"+offre.getTitreoffre()+"',CONTENU='"+offre.getContenu()+"',IDTYPEDECONTRAT='"+offre.getIdtypecontrat()+"',DUREEOFFRE='"+offre.getDureeoffre()+"',IDNIVEAUMINIMUM='"+offre.getIdniveauminimum()+"' where IDOFFFRE='"+request.getParameter("idOffreActuel")+"'");
+		query.executeUpdate();
+		sessions.close();	
+		request.setAttribute("modif"+request.getAttribute("valeur"),0 );		
+	}	
 }

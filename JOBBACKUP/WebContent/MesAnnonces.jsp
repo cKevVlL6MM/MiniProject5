@@ -17,18 +17,49 @@
 			<h3><c:out value="${listeOffres.getContenu()}"/></h3>
 			<h3><c:out value="${listeOffres.getDatepublication()}"/></h3>
 			<h3><c:out value="${listeOffres.getDureeoffre()}"/></h3>
-			<h3>modifier l'offre</h3>
-		</c:forEach>
+			<form method="post" action="modiferAnnonceController" ><input type="hidden" name="valeur" value="$i"/><input type="submit" value="Modifier l'offre"/></form>
+			<%if((Integer)request.getAttribute("modif"+"$i")==1) { %>
+				<form action="modifAnnonceController" method="post">
+					<label for="titreoffre">Titre</label><br/>
+					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" ><br/>
+					<label for="contenu">Contenu de l'annonce</label><br/>
+					<textarea name="contenu" rows="5" cols="50"></textarea><br/>
+					<label for="dureeoffre">Fin de l'offre</label><br/>
+					<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy"><br/>
+					<label for="idtypecontrat">Type de Contrat</label><br/>
+					<select class="form-control" id="idtypecontrat" name="idtypecontrat">
+												<option value="-1"></option>
+												<option value="5">Stage</option>
+												<option value="3">Alternance</option>
+												<option value="4">VIE</option>
+												<option value="1">CDD</option>
+												<option value="2">CDI</option>
+												<option value="6">Bénévolat</option>
+											</select><br/>
+					<label for="idniveauminimum">Promotion ciblée</label><br/>
+					<SELECT name="idniveauminimum" size="1" required>
+						<OPTION value="1">cpi1
+						<OPTION value="2">cpi2
+						<OPTION value="3">ing1
+						<OPTION value="4">ing2
+						<OPTION value="5">ing3
+					</SELECT><br/>
+					<input type="hidden" name="idOffreActuel" value="${listeOffres.getIdoffre()}"/>
+					<input type="hidden" name="valeur" value="$i"/>
+					<input type="submit" value="Enregistrer"/>						
+				</form>
+			<% } %>
+	 	</c:forEach> 
 	</c:if>
 	<c:if test="${empty listeOffres }">
 		<h3 style="text-align: center">Il n'y a pas d'annonce enregistrée</h3>
 	</c:if>
 	<h3>Enregistrer une nouvelle annonce</h3>
-	<form action="annonceController" method="post">
+	<form action="creerAnnonceController" method="post">
 		<label for="titreoffre">Titre</label><br/>
 		<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" ><br/>
 		<label for="contenu">Contenu de l'annonce</label><br/>
-		<textarea name="contenu" rows="10" cols="50"></textarea><br/>
+		<textarea name="contenu" rows="5" cols="50"></textarea><br/>
 		<label for="dureeoffre">Fin de l'offre</label><br/>
 		<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy"><br/>
 		<label for="idtypecontrat">Type de Contrat</label><br/>
