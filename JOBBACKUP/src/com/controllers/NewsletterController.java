@@ -16,13 +16,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Properties;
 
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+@Controller					
 @RequestMapping(value="/newsletter")
 public class NewsletterController {
 	
@@ -49,16 +52,45 @@ public class NewsletterController {
 
 		try {
 
-			Message message = new MimeMessage(session);
+			@SuppressWarnings("deprecation")
+			SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+			//SessionFactory sessionFactory = createSessionFactory();
+			org.hibernate.Session sessions= sf.openSession();
+			ArrayList<String> liste=new ArrayList<String>();
+			Query query;
+			if(mail.isCpi1()){
+				query=sessions.createSQLQuery("select email from Table_Eleve e, Table_Classe c where  c.NOMCLASSE='cpi1' and c.IDCLASSE=e.IDCLASSE");
+				liste.addAll(query.list());
+			}
+			if(mail.isCpi2()){
+				query=sessions.createSQLQuery("select email from Table_Eleve e, Table_Classe c where  c.NOMCLASSE='cpi2' and c.IDCLASSE=e.IDCLASSE");
+				liste.addAll(query.list());
+			}
+			if(mail.isIng1()){
+				query=sessions.createSQLQuery("select email from Table_Eleve e, Table_Classe c where  c.NOMCLASSE='ing1' and c.IDCLASSE=e.IDCLASSE");
+				liste.addAll(query.list());
+			}
+			if(mail.isIng2()){
+				query=sessions.createSQLQuery("select email from Table_Eleve e, Table_Classe c where  c.NOMCLASSE='ing2' and c.IDCLASSE=e.IDCLASSE");
+				liste.addAll(query.list());
+			}
+			if(mail.isIng3()){
+				query=sessions.createSQLQuery("select email from Table_Eleve e, Table_Classe c where  c.NOMCLASSE='ing3' and c.IDCLASSE=e.IDCLASSE");
+				liste.addAll(query.list());
+			}
+			
+		Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("jobeisti@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("gaspardjrm@eisti.eu"));
+			for (int i=0;i<liste.size();i++) {
+				message.addRecipients(Message.RecipientType.TO,	InternetAddress.parse(liste.get(i)));
+			}
 			message.setSubject("Newsletter du "+date.format(today)+" : "+mail.getSujet());
-			message.setContent("<h1>"+mail.getContenu()+"</h1>", "text/html; charset=utf-8");
+			message.setContent(mail.getContenu()+"<br/><img src=\"<c:url value=\"img/LOGO.png\"/>\"/>", "text/html; charset=utf-8");
 
 			Transport.send(message);
 
 			System.out.println("Done");
+
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
