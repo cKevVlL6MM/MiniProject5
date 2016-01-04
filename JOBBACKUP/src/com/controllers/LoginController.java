@@ -127,7 +127,7 @@ public static String Redirect(String role, HttpServletRequest request)
 		
 		request.getSession().setAttribute("profileutilisateur",profilEntreprise);
 		
-		return "AccueilEntreprise";
+		return "AccueilEntreprises";
 	}
 	else if(role.equals(roleAdmin))
 	{

@@ -81,7 +81,7 @@
                     
                 </div>
                 <div class="col-lg-8 ">
-               Réservé : liste actualités et evènements 
+              ESPACE ENTREPRISE
                     
                     
                 </div>
