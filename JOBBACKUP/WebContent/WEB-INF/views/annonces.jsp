@@ -109,25 +109,7 @@
 							<div class="critere-recherche">
 								<!-- date de création -->
 								<label for="datepublication" style="color:white;">Date de création</label>
-								<div class="container">
-								    <div class="row">
-								        <div style="width:250px">
-								        	<div class="form-group">
-								           <!--   <div class='input-group date' id='datetimepicker1'>
-								                    <input type='text' class="form-control" name="datepublication" id="datepublication" />
-								                    <span class="input-group-addon">
-								                        <span class="glyphicon glyphicon-calendar"></span>
-								                    </span>
-								                </div> -->    
-								            </div>
-								            <script type="text/javascript">
-									            $(function () {
-									                $('#datetimepicker1').datetimepicker();
-									            });
-								       		 </script>
-								        </div>
-								    </div>
-								</div>
+								
 							</div>
 							<br/>
 
@@ -135,25 +117,7 @@
 							<div class="critere-recherche">
 								<!-- date de création -->
 								<label for="dureeoffre" style="color:white;">Date de fin</label>
-								<div class="container">
-								    <div class="row">
-								        <div style="width:250px">
-								        	<div class="form-group">
-								             <!--      <div class='input-group date' id='datetimepicker1'>
-								                    <input type='text' class="form-control" name="dureeoffre" id="dureeoffre"/>
-								                    <span class="input-group-addon">
-								                        <span class="glyphicon glyphicon-calendar"></span>
-								                    </span> 
-								                </div>-->
-								            </div>
-								            <script type="text/javascript">
-									            $(function () {
-									                $('#datetimepicker1').datetimepicker();
-									            });
-								       		 </script>
-								        </div>
-								    </div>
-								</div>
+								
 							</div>
 							<br/>
 							
@@ -178,42 +142,45 @@
 
 
 				<!-- left panel -->
+				
 			<section class="col-xs-9">
 					
-				<!-- card des annonces -->
-				<c:set var="i" value="0"/>
+				
+				
 				
 				<c:if test="${not empty listeAnnonces}">
-					<c:forEach var="i" begin="1" end="${fn:length(listeAnnonces)}" step="1">
+					<c:forEach var="i" begin="0" end="${(fn:length(listeAnnonces))-1}" step="1">
+					
 						<div class="card" style="border: 1px solid darkgrey;
 														background-color: white;
 														margin-top: 90px;">
 							<div class="alignement_bloc" style="display: inline-block;">
-								<img src="jobteaser.png" alt="logoSociete" class="logoSocieteAnnonce" style="width:100px;
+								<img src="img/LOGO.png" size="40"  alt="logoSociete" class="logoSocieteAnnonce" style="width:100px;
 																											height: 100px;
-																											margin-top: 20px;
+																											margin-top: 25px;
 																											margin-bottom: 25px;
 																											margin-right: 20px;
 																											margin-left: 20px;"	>
 							</div>
+							
 							<div class="alignement_bloc" style="display: inline-block;">
-								<h3><c:out value="${search.getTitreoffre()}"/></h3>
+						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/></h3>	
 								<hr style="border-color:darkgrey">
 								<div class="alignement_bloc" style="display: inline-block;">
-									<img src="jobteaser.png" alt="logoTypeContrat" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${search.getTypecontrat()}"/>
+									<img src="img/contract11.png" alt="logoTypeContrat" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${listeAnnonces.get(i).getNomTypeContrat()}"/>
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
-									<img src="jobteaser.png" alt="logoSuitCase" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${search.getIdentreprise()}"/>
+									<img src="img/suitcase57.png" alt="logoSuitCase" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${listeAnnonces.get(i).getEnterprise().getNomsociete()}"/>
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
-									<img src="jobteaser.png" alt="logoLieu" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${search.getIdentreprise()}"/>lieu
+									<img src="img/placeholder8.png" alt="logoLieu" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${listeAnnonces.get(i).getEnterprise().getCodepostal()}"/>lieu
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
-									<img src="jobteaser.png" alt="logoDate" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${search.getDatepublication()}"/>
+									<img src="img/calendar68.png" alt="logoDate" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${listeAnnonces.get(i).getOffre().getDatepublication()}"/>
 								</div>
 							</div>
 						</div>
@@ -222,7 +189,7 @@
 					<c:if test="${empty listeAnnonces }">
 						<h3 style="text-align: center">Il n'y a pas d'annonce disponible</h3>
 					</c:if>
-				</section>	
+				</section>
 				
 				
 			</div>

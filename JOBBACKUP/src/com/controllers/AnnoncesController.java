@@ -1136,9 +1136,12 @@ public class AnnoncesController {
 		//on remplit les array des id, nous chercherons � trouver les noms des secteurs d'activit� � partir des idtypesecteur
 		for(int i=0; i<nombreOffres; i++)
 		{
+			
 			ArrayIDE[i]=listeOffres.get(i).getIdentreprise();
+			System.out.println("identreprise "+ArrayIDE[i].toString());
 			ArrayIDS[i]=listeOffres.get(i).getIdtypesecteur();
 			ArrayIDC[i]=listeOffres.get(i).getIdtypecontrat();
+			System.out.println("identreprise "+ArrayIDE[i].toString());
 			ArrayINM[i]=listeOffres.get(i).getIdniveauminimum();
 		}
 		
@@ -1151,15 +1154,16 @@ public class AnnoncesController {
 			for(int j=0; j<queryIDE.list().size(); j++)
 			{
 				RechercheListee b = new RechercheListee();
-				if(j<listeAnnonces.size())
-				{
+			
 					b=listeAnnonces.get(j);
 					TableEntreprises te = (TableEntreprises) queryIDE.list().get(j);
 					b.setEnterprise(te);
+					
+					
 					listeAnnonces.set(j, b);
 					
 					
-				}
+				
 								
 			}
 				
@@ -1249,9 +1253,7 @@ public class AnnoncesController {
 					
 		}
 		
-		
-
-		
+	
 		
 		return new ModelAndView("annonces","listeAnnonces",listeAnnonces);
 	}
