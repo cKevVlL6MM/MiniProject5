@@ -80,7 +80,7 @@ public class InscriptionController  {
 				break;
 			}
 
-			Query query=sessions.createSQLQuery("call CREER_ELEVE(:pNOM,:pPRENOM,:pIDCLASSE,:pCIVILITE,:pAGE,:pTELEPHONE,:pEMAIL,:pIDENTIFIANT,:pMOTDEPASSE)");
+			Query query=sessions.createSQLQuery("call CREER_ELEVE(:pNOM,:pPRENOM,:pIDCLASSE,:pCIVILITE,:pTELEPHONE,:pAGE,:pEMAIL,:pIDENTIFIANT,:pMOTDEPASSE)");
 			query.setParameter("pNOM", user.getNom());		
 			query.setParameter("pPRENOM", user.getPrenom());
 			query.setParameter("pIDCLASSE",convertIntToBD(classe));
