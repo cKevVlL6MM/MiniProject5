@@ -130,7 +130,7 @@ public class ProfileUtilisateur {
 			
 			
 		}
-		else if(role == roleEntreprise)
+		else if(role.equals(roleEntreprise))
 		{
 			Query query=sessions.createQuery("FROM TableEntreprises WHERE IDUSER = :id ")
 					.setParameter("id", tu.getIduser());
