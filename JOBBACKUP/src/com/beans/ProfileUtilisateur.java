@@ -37,7 +37,7 @@ public class ProfileUtilisateur {
 	public boolean isAdmin()
 	{
 		
-		if(this.roleUID==roleAdmin)
+		if(this.roleUID.equals(roleAdmin))
 		{
 			return true;
 		}
