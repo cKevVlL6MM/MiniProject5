@@ -99,6 +99,12 @@ public class AnnoncesController {
 		
 		
 		String to = search.getTitreoffre();
+		if(to.equals("") || to==null )
+		{
+			to=null;
+		}
+		
+		
 		int inm = search.getIdniveauminimum();
 		inm=-1;
 		int itc = search.getIdtypecontrat();
@@ -123,7 +129,7 @@ public class AnnoncesController {
 			System.out.println("inside");
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to ")
 			.addEntity(TableOffres.class)
-			.setParameter("to","%"+to+"%");
+			.setParameter("to",to);
 			
 			
 			/*
@@ -230,7 +236,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE  = :to and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("inm", bits);
+					.setParameter("its", bits);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 			
@@ -1244,6 +1250,7 @@ public class AnnoncesController {
 		}
 		
 		
+
 		
 		
 		return new ModelAndView("annonces","listeAnnonces",listeAnnonces);

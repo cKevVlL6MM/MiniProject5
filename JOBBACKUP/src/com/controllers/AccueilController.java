@@ -21,7 +21,6 @@ public class AccueilController {
 		
 		
 		
-		
 		if(pl.isEleve())
 		{
 			return "AccueilEleve";

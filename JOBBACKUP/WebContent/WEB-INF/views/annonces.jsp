@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -26,28 +25,32 @@
       <link href="Bootstrap/font-awesome.min.css" rel="stylesheet">
      <script src="Bootstrap/bootstrap.js" type="text/javascript"></script>
  <link href="Bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="Bootstrap/styleAnnonces.css" rel="stylesheet" type="text/css" />
+ <link href="Bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+ 
+
   
 
 	</head>
-	<body>
+	<c:import url="header.jsp"/>
+	<body style="background-color: rgba(173, 216, 230, 0.19);">
 	
+<!-- header -->
+		
 
-
-		<div class="container" >
-			<div class="row">
+		<div class="container" style="margin-top: -500px;">
+			<div class="row" style="border-right: 5px solid rgba(17,105,142,1); ">
 
 <!-- 			right panel -->
-				<aside class="col-xs-3">
+				<aside class="col-xs-3" style="background-color:rgba(17,105,142,1); border-left:lightgrey;">
 					<form action="annonces" method="post">
-						<h3>Critères de Recherche</h3>
+						<h3 style="color:white;">Critères de Recherche</h3>
 						<hr>
 						<div class="content">
 						
 
 							<div class="critere-recherche">
 								<!-- type de contrat -->
-								<label for="idtypecontrat">Contrat</label>
+								<label for="idtypecontrat" style="color:white;">Contrat</label>
 								<select class="form-control" id="idtypecontrat" name="idtypecontrat">
 									<option value="-1"></option>
 									<option value="5">Stage</option>
@@ -63,8 +66,8 @@
 
 							<div class="critere-recherche">
 								<!-- secteur -->
-								<label for="idtypesecteur">Secteur</label>
-								<select id="idtypesecteur" name="idtypesecteur">
+								<label for="idtypesecteur" style="color:white;">Secteur</label>
+								<select id="idtypesecteur" name="idtypesecteur" class="form-control">
 									<option value="-1"></option>
 									<option value="1">Informatique</option>
 									<option value="2">Aéronautique</option>
@@ -81,10 +84,11 @@
 
 							<br/>
 
+							
 							<div class="critere-recherche">
 								<!-- compétences requises -->
-								<label for="idtypecompetence">Compétences Requises</label>
-								<select class="form-control" id="idtypecompetence" name="idtypecompetence">
+								<label for="idniveauminimum" style="color:white;">Niveau minimum requis</label>
+								<select class="form-control" id="idniveauminimum" name="idniveauminimum">
 									<option value="-1"></option>
 									<option value="1">Développement web</option>
 									<option value="2">Développement logiciel</option>
@@ -102,20 +106,19 @@
 							
 							
 							
-							<!-- <div class="critere-recherche"> -->
+							<div class="critere-recherche">
 								<!-- date de création -->
-								<!-- 
-								<label for="datepublication">Date de création</label>
+								<label for="datepublication" style="color:white;">Date de création</label>
 								<div class="container">
 								    <div class="row">
 								        <div style="width:250px">
 								        	<div class="form-group">
-								                <div class='input-group date' id='datetimepicker1'>
-								                    <input type='text' class="form-control" />
+								           <!--   <div class='input-group date' id='datetimepicker1'>
+								                    <input type='text' class="form-control" name="datepublication" id="datepublication" />
 								                    <span class="input-group-addon">
 								                        <span class="glyphicon glyphicon-calendar"></span>
 								                    </span>
-								                </div>
+								                </div> -->    
 								            </div>
 								            <script type="text/javascript">
 									            $(function () {
@@ -126,29 +129,43 @@
 								    </div>
 								</div>
 							</div>
-							<br/> -->
+							<br/>
 
+
+							<div class="critere-recherche">
+								<!-- date de création -->
+								<label for="dureeoffre" style="color:white;">Date de fin</label>
+								<div class="container">
+								    <div class="row">
+								        <div style="width:250px">
+								        	<div class="form-group">
+								             <!--      <div class='input-group date' id='datetimepicker1'>
+								                    <input type='text' class="form-control" name="dureeoffre" id="dureeoffre"/>
+								                    <span class="input-group-addon">
+								                        <span class="glyphicon glyphicon-calendar"></span>
+								                    </span> 
+								                </div>-->
+								            </div>
+								            <script type="text/javascript">
+									            $(function () {
+									                $('#datetimepicker1').datetimepicker();
+									            });
+								       		 </script>
+								        </div>
+								    </div>
+								</div>
+							</div>
+							<br/>
+							
+							
 							 <div class="critere-recherche">
 								<!-- mots clés -->
-								<label class="side-search-label" for="titreoffre">Mots-clés</label>
+								<label class="side-search-label" for="titreoffre" style="color:white;">Mots-clés</label>
 								<input class="form-control" id="titreoffre" name="titreoffre" placeholder="Compétences, poste ..." type="text" style="width:250px">
 							</div>
 
 							<br/>
 
-							<!-- <div class="critere-recherche"> -->
-								<!-- ou? -->
-								<!-- 
-								<div style="width:250px">
-									<label class="side-search-label" for="location">Où</label>
-									<div class="bootstrap-tagsinput location_tags">
-										<input type="text" placeholder="Saisir un lieu" class="form-control" style="" autocomplete="on">
-									</div>
-									<input class="form-control" data-js-component-opts="{&quot;name&quot;:&quot;GmapsAutocomplete&quot;,&quot;opts&quot;:{&quot;field_name&quot;:&quot;locations&quot;,&quot;value&quot;:null}}" id="gmaps-input-city" name="loc" placeholder="Saisir un lieu" type="text" style="display: none;">
-									<div style="display:none;"></div>
-								</div>
-							</div>
-							<br/>-->
 
 							<div class="submit-field">
 								<input class="btn btn-primary" type="submit" value="Rechercher">
@@ -161,38 +178,59 @@
 
 
 				<!-- left panel -->
-				<section class="col-xs-9">
+			<section class="col-xs-9">
 					
 				<!-- card des annonces -->
-						<div class="card">
-							<div class="alignement_bloc">
-								<img src="img/LOGO.png" alt="logoSociete" class="logoSocieteAnnonce">
+				<c:set var="i" value="0"/>
+				
+				<c:if test="${not empty listeAnnonces}">
+					<c:forEach var="i" begin="1" end="${fn:length(listeAnnonces)}" step="1">
+						<div class="card" style="border: 1px solid darkgrey;
+														background-color: white;
+														margin-top: 90px;">
+							<div class="alignement_bloc" style="display: inline-block;">
+								<img src="jobteaser.png" alt="logoSociete" class="logoSocieteAnnonce" style="width:100px;
+																											height: 100px;
+																											margin-top: 20px;
+																											margin-bottom: 25px;
+																											margin-right: 20px;
+																											margin-left: 20px;"	>
 							</div>
-							<div class="alignement_bloc">
-								<h3>Nom de l'annonce</h3>
+							<div class="alignement_bloc" style="display: inline-block;">
+								<h3><c:out value="${search.getTitreoffre()}"/></h3>
 								<hr style="border-color:darkgrey">
-								<div class="alignement_bloc">
-									<img src="img/LOGO.png" alt="logoTypeContrat" class="logoPNGannonce">
-									type de contrat
+								<div class="alignement_bloc" style="display: inline-block;">
+									<img src="jobteaser.png" alt="logoTypeContrat" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${search.getTypecontrat()}"/>
 								</div>
-								<div class="alignement_bloc">
-									<img src="img/LOGO.png" alt="logoSuitCase" class="logoPNGannonce">
-									société
+								<div class="alignement_bloc" style="display: inline-block;">
+									<img src="jobteaser.png" alt="logoSuitCase" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${search.getIdentreprise()}"/>
 								</div>
-								<div class="alignement_bloc">
-									<img src="img/LOGO.png" alt="logoLieu" class="logoPNGannonce">
-									lieu
+								<div class="alignement_bloc" style="display: inline-block;">
+									<img src="jobteaser.png" alt="logoLieu" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${search.getIdentreprise()}"/>lieu
 								</div>
-								<div class="alignement_bloc">
-									<img src="img/LOGO.png" alt="logoDate" class="logoPNGannonce">
-									date de publication
+								<div class="alignement_bloc" style="display: inline-block;">
+									<img src="jobteaser.png" alt="logoDate" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
+									<c:out value="${search.getDatepublication()}"/>
 								</div>
 							</div>
 						</div>
-				</section>
+					</c:forEach>
+					</c:if>
+					<c:if test="${empty listeAnnonces }">
+						<h3 style="text-align: center">Il n'y a pas d'annonce disponible</h3>
+					</c:if>
+				</section>	
+				
+				
 			</div>
 		</div>		
 		
+				<!-- footer -->
 		
 	</body>
+	<c:import url="footer.jsp"/>
+	
 </html>
