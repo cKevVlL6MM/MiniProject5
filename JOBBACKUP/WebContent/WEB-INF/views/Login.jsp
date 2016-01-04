@@ -24,7 +24,6 @@
 </div>
 
 </div>
-
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -86,8 +85,8 @@
 										<input type="text" name="email" id="email" tabindex="1" class="form-control" value="E-mail" value="">
 									</div>
 									<div class="form-group">
-									<label for="Téléphone">Numéro</label>
-										<input type="text" name="numero" id="numero" tabindex="1" class="form-control" value="Telephone" value="">
+									<label for="Téléphone">Téléphone</label>
+										<input type="text" name="telephone" id="telephone" tabindex="1" class="form-control" value="Telephone" value="">
 									</div>
 									<div class="form-group">
 		<label for="myButtons">Type de compte :</label>						
@@ -102,38 +101,56 @@
 
 <div id="register-eleve" style="display: none;">
 									<div class="form-group">
-									<label for="username">age</label>
-										<input type="text" name="age" id="age" tabindex="1" class="form-control" >
+										<label for="username">Nom</label>
+											<input type="text" name="nom" id="nom" tabindex="1" class="form-control" >
+										<label for="username">Prenom</label>	
+											<input type="text" name="prenom" id="prenom" tabindex="1" class="form-control" >
+										<label for="username">Age</label>	
+											<input type="text" name="age" id="age" tabindex="1" class="form-control" >
+										<label for="username">Civilité</label>	
+										<select name="civilite" size=1 required>
+											<option>M.
+											<option>Mme
+											<option>Mlle
+										</select><br/>
+										<label for="username">Classe</label> 
+										<SELECT name="classe" size="1" required>
+											<OPTION>cpi1
+											<OPTION>cpi2
+											<OPTION>ing1
+											<OPTION>ing2
+											<OPTION>ing3
+										</SELECT><br/>
 									</div>
 									</div>
 									
 									<div id="register-entreprise" style="display: none;">
 									<div class="form-group">
+									<label for="username">Nom de l'entreprise</label>
+										<input type="text" name="nom" id="nom" tabindex="1" class="form-control">
 									<label for="username">Adresse siège social</label>
-										<input type="text" name="adresseEntreprise" id="adresseEntreprise" tabindex="1" class="form-control">
+										<input type="text" name="adresse" id="adresse" tabindex="1" class="form-control">
+									<label for="username">Code Postal</label>
+										<input type="text" name="codePostal" id="codePostal" tabindex="1" class="form-control">
+									<label for="username">Fax</label>
+										<input type="text" name="fax" id="fax" tabindex="1" class="form-control">
+											<label for="username">Secteur</label> 
+										<SELECT name="typeSecteur" size="1" required>
+											<OPTION>Informatique
+											<OPTION>Aeronautique
+											<OPTION>Mecanique
+											<OPTION>Agriculture
+											<OPTION>Automobile
+											<OPTION>Finance
+											<OPTION>Assurance
+											<OPTION>Alimentation
+											<OPTION>Design
+											<OPTION>Autre
+										</SELECT><br/>
 									</div>
 									</div>
-									
-									
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 									</div>
-									
-								
-									<div class="form-group">
+								<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-default" value="S'inscrire">

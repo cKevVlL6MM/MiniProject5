@@ -3,7 +3,7 @@ package com.beans;
 import java.math.BigDecimal;
 
 public class Registration {
-	private String identifiant;
+	private String username;
 	private String password;
 	private String nom;
 	private String prenom;
@@ -12,19 +12,54 @@ public class Registration {
 	private String classe;
 	private String email;
 	private String civilite;
+	private String options;
+	private String adresse;
+	private String typeSecteur;
+	private String codePostal;
+	private String fax;
 
 	
+	public String getTypeSecteur() {
+		return typeSecteur;
+	}
+	public void setTypeSecteur(String typeSecteur) {
+		this.typeSecteur = typeSecteur;
+	}
+	public String getCodePostal() {
+		return codePostal;
+	}
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	public String getOptions() {
+		return options;
+	}
+	public void setOptions(String type) {
+		this.options = type;
+	}
 	public String getCivilite() {
 		return civilite;
 	}
 	public void setCivilite(String civilite) {
 		this.civilite = civilite;
 	}
-	public String getIdentifiant() {
-		return identifiant;
+	public String getUsername() {
+		return username;
 	}
-	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
+	public void setUsername(String identifiant) {
+		this.username = identifiant;
 	}
 	public String getPassword() {
 		return password;

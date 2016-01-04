@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -47,22 +48,16 @@ public class InscriptionController  {
 	protected void inscriptionValidation(@ModelAttribute("registration") Registration user, ModelMap model) {
 		// TODO Auto-generated method stub
 		model.addAttribute("registration", user);
-		System.out.println("identifiant : "+user.getIdentifiant());
-		System.out.println("password : "+user.getPassword());
-		System.out.println("nom : "+user.getNom());
-		System.out.println("prenom : "+user.getPrenom());
-		System.out.println("age : "+user.getAge());
-		System.out.println("telephone : "+user.getTelephone());
-		System.out.println("classe : "+user.getClasse());
-		System.out.println("email :"+user.getEmail());
-		System.out.println("civilite"+user.getCivilite());
 		
-		if((user.getIdentifiant()=="")||(user.getPassword()=="")||(user.getNom()=="")||(user.getPrenom()=="")){
-			
-		}
-		
-		
-		else {
+		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+		//SessionFactory sessionFactory = createSessionFactory();
+		Session sessions= sf.openSession();
+		Query querytestEleve=sessions.createSQLQuery("select count(*) from Table_Eleve where email='"+user.getEmail()+"'");
+		Query querytestEntreprise=sessions.createSQLQuery("select count(*) from Table_Entreprise where email='"+user.getEmail()+"'");
+		BigDecimal test;
+		if((user.getFax()=="")&&(user.getPrenom()!="")){
+			test=(BigDecimal) querytestEleve.uniqueResult();
+			if(test.intValue()<1){
 			int classe;
 			switch(user.getClasse()){
 			case "cpi1":
@@ -85,10 +80,6 @@ public class InscriptionController  {
 				break;
 			}
 
-			@SuppressWarnings("deprecation")
-			SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
-			//SessionFactory sessionFactory = createSessionFactory();
-			Session sessions= sf.openSession();
 			Query query=sessions.createSQLQuery("call CREER_ELEVE(:pNOM,:pPRENOM,:pIDCLASSE,:pCIVILITE,:pAGE,:pTELEPHONE,:pEMAIL,:pIDENTIFIANT,:pMOTDEPASSE)");
 			query.setParameter("pNOM", user.getNom());		
 			query.setParameter("pPRENOM", user.getPrenom());
@@ -97,11 +88,64 @@ public class InscriptionController  {
 			query.setParameter("pAGE", user.getAge());
 			query.setParameter("pTELEPHONE", user.getTelephone());
 			query.setParameter("pEMAIL", user.getEmail());
-			query.setParameter("pIDENTIFIANT",user.getIdentifiant());
+			query.setParameter("pIDENTIFIANT",user.getUsername());
 			query.setParameter("pMOTDEPASSE", user.getPassword());
 			query.executeUpdate();
 			sessions.close();	
-		
+			}
+			
+		}
+		else if((user.getAdresse()!=null)&&(user.getPrenom()==null)) {
+			test=(BigDecimal) querytestEntreprise.uniqueResult();
+			if(test.intValue()<1){
+			int type;
+			switch(user.getTypeSecteur()){
+			case "Informatique":
+				type=1;
+				break;
+			case "Aeronautique":
+				type=2;
+				break;
+			case "Mecanique":
+				type=3;
+				break;
+			case "Agriculture":
+				type=4;
+				break;
+			case "Automobile":
+				type=5;
+				break;
+			case "Finance":
+				type=6;
+				break;
+			case "Assurance":
+				type=7;
+				break;
+			case "Alimentation":
+				type=8;
+				break;
+			case "Design":
+				type=9;
+				break;
+			default:
+				type=10;
+				break;
+				
+			}
+			
+			Query query=sessions.createSQLQuery("call CREER_ENTREPRISE(:pNOMSOCIETE,:pADRESSE,:pTYPESECTEUR,:pFAX,:pTELEPHONE,:pCODEPOSTAL,:pEMAIL,:pIDENTIFIANT,:pMOTDEPASSE)");
+			query.setParameter("pNOMSOCIETE", user.getNom());		
+			query.setParameter("pADRESSE", user.getAdresse());
+			query.setParameter("pTYPESECTEUR", convertIntToBD(type));
+			query.setParameter("pFAX", user.getFax());
+			query.setParameter("pCODEPOSTAL", user.getCodePostal());
+			query.setParameter("pEMAIL", user.getEmail());
+			query.setParameter("pIDENTIFIANT",user.getUsername());
+			query.setParameter("pMOTDEPASSE", user.getPassword());
+			query.setParameter("pTELEPHONE", user.getTelephone());
+			query.executeUpdate();
+			sessions.close();	
+			}
 		}
 		
 		
