@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 janv. 2016 11:25:45 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableEvenements" table="TABLE_EVENEMENTS" schema="JOBEISTI" optimistic-lock="version">
+        <id name="idevent" type="big_decimal">
+            <column name="IDEVENT" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomevenement" type="string">
+            <column name="NOMEVENEMENT" length="150" not-null="true" />
+        </property>
+        <property name="datedebut" type="date">
+            <column name="DATEDEBUT" length="7" />
+        </property>
+        <property name="datefin" type="date">
+            <column name="DATEFIN" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -73,8 +73,10 @@ public class AnnoncesController {
 	{
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
 		
-		if(pl.isAdmin() || pl.isEleve() || pl.isEnterprise())
+		if( pl!=null && ( pl.isAdmin() || pl.isEleve() || pl.isEnterprise()))
 		{
+			
+			
 			return "annonces";
 		}
 		else

@@ -43,10 +43,30 @@ public class LoginController {
 	private static ServiceRegistry serviceRegistry;
 	
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public static String doGet(HttpServletRequest request)
+	{
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		if(pl!=null)
+		{
+			if(pl.isEleve() || pl.isAdmin() || pl.isEnterprise())
+			{
+				return Redirect(pl.getRoleUID(),request);
+			}
+		}
+		return "Login";
+		
+		
+	}
+	
+	
+	
+	
 	
 	public static String CheckRole(String identifiant, String mdp,HttpServletRequest request) 
 	
 	{
+		
 		
 		SessionFactory sf =  HibernateUtil.getSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
