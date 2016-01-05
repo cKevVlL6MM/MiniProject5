@@ -163,12 +163,18 @@
 																											margin-left: 20px;"	>
 							</div>
 							
+							
 							<div class="alignement_bloc" style="display: inline-block;">
 						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/></h3>	
 								<hr style="border-color:darkgrey">
+							
+									<h4><c:out value="${listeAnnonces.get(i).getNomTypeContrat()}"/></h4>
+								</div>	
+								
+								
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/contract11.png" alt="logoTypeContrat" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${listeAnnonces.get(i).getNomTypeContrat()}"/>
+									<c:out value="${listeAnnonces.get(i).getOffre().getContenu()}"/>
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/suitcase57.png" alt="logoSuitCase" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
@@ -176,7 +182,7 @@
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/placeholder8.png" alt="logoLieu" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${listeAnnonces.get(i).getEnterprise().getCodepostal()}"/>lieu
+									<c:out value="${listeAnnonces.get(i).getEnterprise().getCodepostal()}"/>
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/calendar68.png" alt="logoDate" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">

@@ -115,10 +115,6 @@ public static String Redirect(String role, HttpServletRequest request)
 		
 		request.getSession().setAttribute("profileutilisateur", profilEleve);
 		
-		
-		
-		
-		
 		return "AccueilEleve";
 	}
 	else if(role.equals(roleEntreprise))
@@ -156,19 +152,22 @@ public static String Redirect(String role, HttpServletRequest request)
 		String EnteredId=logins.getIdentifiant();
 		String EnteredPassword=logins.getPassword();
 		
+		if(EnteredId!=null && EnteredPassword !=null)
 		
-		
-		
+		{
 		String Result = CheckRole(EnteredId,EnteredPassword,request) ;
 		
+		//permet a Result.equals de ne pas retourner une exception null
 		
-		
-			
-		
-		
-		
+		if(!Result.equals("invalid"))
+		{
 		return  Redirect(Result,request);
+		}
 		
+		
+		}
+		
+			return "Login";
 		
 		
 	}
