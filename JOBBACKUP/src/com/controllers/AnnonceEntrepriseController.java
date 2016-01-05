@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beans.ProfileUtilisateur;
 
 import hibernate.model.TableOffres;
+import hibernate.model.TableOffresAttentes;
 
 @Controller			
 public class AnnonceEntrepriseController {
@@ -35,9 +36,9 @@ public class AnnonceEntrepriseController {
     }
 	
 	@RequestMapping(value="/creerAnnonceController",method = RequestMethod.POST)
-	protected ModelAndView creerAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+	protected ModelAndView creerAnnonce(@ModelAttribute("tableoffres")TableOffresAttentes offre, ModelMap model, HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
-		model.addAttribute("tableoffres", offre);
+		model.addAttribute("tableoffresattentes", offre);
 		@SuppressWarnings("deprecation")
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
@@ -107,13 +108,20 @@ public class AnnonceEntrepriseController {
 			//SessionFactory sessionFactory = createSessionFactory();
 			Session sessions= sf.openSession();
 			Query query=sessions.createSQLQuery("select * from Table_Offres where IDENTREPRISE='"+pl.getEnterpriseInfo().getIdentreprise()+"'").addEntity(TableOffres.class);
+			Query queryAttentes=sessions.createSQLQuery("select * from Table_Offres_Attentes where IDENTREPRISE='"+pl.getEnterpriseInfo().getIdentreprise()+"'").addEntity(TableOffresAttentes.class);
 			ArrayList<TableOffres> offres=new ArrayList<TableOffres>();
 			if (!query.list().isEmpty()) {
 				for (int i=0;i<query.list().size();i++){
 					offres.add((TableOffres) query.list().get(i));
 				}
+				request.setAttribute("nbValide",query.list().size() );
 			}
-			System.out.println(offres.get(0).getTitreoffre());
+			if (!queryAttentes.list().isEmpty()) {
+				for (int i=0;i<queryAttentes.list().size();i++){
+					offres.add((TableOffresAttentes) queryAttentes.list().get(i));
+				}
+			}
+			request.setAttribute("nbValide",query.list().size() );
 			if(request.getParameter("valeur")!=null){
 				request.setAttribute("valeur",request.getParameter("valeur"));
 			}
