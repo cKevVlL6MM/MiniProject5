@@ -41,6 +41,12 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
+							<c:if test="${not empty messageSuccess }">
+								<div class="alert alert-success" role="alert">${messageSuccess}</div>
+							</c:if>
+							<c:if test="${not empty messageError }">
+								<div class="alert alert-danger" role="alert">${messageError}</div>
+							</c:if>
 								<form id="login-form" action="SignIn" method="post" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="identifiant" id="identifiant" tabindex="1" class="form-control" value="Identifiant" value="">

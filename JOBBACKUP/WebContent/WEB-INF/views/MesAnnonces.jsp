@@ -18,6 +18,7 @@
 			<h3><c:out value="${listeOffres.get(i).getDatepublication()}"/></h3>
 			<h3><c:out value="${listeOffres.get(i).getDureeoffre()}"/></h3>
 			<form method="get" action="modifAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input type="submit" value="Modifier l'offre"/></form>
+			<form method="get" action="supAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input type="submit" value="Supprimer l'offre"/></form>
 			<c:if test="${valeur==listeOffres.get(i).getIdoffre()}">	
 				<form action="modifAnnonceController" method="post">
 					<label for="titreoffre">Titre</label><br/>

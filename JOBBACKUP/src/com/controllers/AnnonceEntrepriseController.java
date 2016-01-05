@@ -74,7 +74,27 @@ public class AnnonceEntrepriseController {
 		sessions.close();
 		request.setAttribute("valeur",null);
 		return new ModelAndView("redirect:modifAnnonceController");
-	}	
+	}
+	
+	@RequestMapping(value="/supAnnonceController",method = RequestMethod.GET)
+	protected ModelAndView supAnnonces (@ModelAttribute("tableoffres")TableOffres offre, ModelMap model,HttpServletRequest request){
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		model.addAttribute("tableoffres", offre);
+		@SuppressWarnings("deprecation")
+		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+		//SessionFactory sessionFactory = createSessionFactory();
+		Session sessions= sf.openSession();
+		Transaction transac = sessions.beginTransaction();
+		int id=Integer.parseInt((String) request.getParameter("valeur"));
+		Query query=sessions.createSQLQuery("delete from TABLE_OFFRES where IDOFFRE=:id");
+		query.setParameter("id", convertIntToBD(id));
+		query.executeUpdate();
+		transac.commit();
+		sessions.close();
+		request.setAttribute("valeur",null);
+		return new ModelAndView("redirect:modifAnnonceController");
+	}
+	
 	
 	@RequestMapping(value="/modifAnnonceController",method = RequestMethod.GET)
 	protected ModelAndView redirAnnonces (HttpServletRequest request){
