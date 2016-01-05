@@ -109,29 +109,47 @@ $("#canceller").on('click', (function(){
 	<c:if test="${not empty listeOffres}">
 	
 	<div class="panel panel-primary" style="width:1000px; margin:10px ">
-	<div class="panel panel-heading">Annonces <div class="pull-right"> <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button>  </div>   </div>
+	<div class="panel panel-heading">Annonces <div class="pull-right"> 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	     <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button>  </div>   </div>
 	
 	
 		
 		<c:forEach var="i" begin="0" end="${(fn:length(listeOffres))-1}" step="1">
 		<div class="panel panel-body" >
-			<h4><b><c:out value="${listeOffres.get(i).getTitreoffre()}"/></b></h4>
-			<h4><c:out value="${listeOffres.get(i).getContenu()}"/></h4>
-		<div style="display: flex; align-content:left;  "><i class="glyphicon glyphicon-calendar" style="color:green" data-toggle="tooltip" title="Date de publication"></i>	&nbsp; <c:out value="${listeOffres.get(i).getDatepublication()}"/></div>
-		<div style="display: flex; align-content:left "><i class="glyphicon glyphicon-calendar" style="color:red" data-toggle="tooltip" title="Date de fin"></i> &nbsp;	<c:out value="${listeOffres.get(i).getDureeoffre()}"/></div>
-			<c:if test="${not empty nbValide}">
+		<div style="display: flex; align-content:left;  ">
+			<h4><b><c:out value="${listeOffres.get(i).getTitreoffre()}"/></b></h4>  <c:if test="${not empty nbValide}"> &nbsp;
 			<c:if test="${i<nbValide}">
-				<h3>Statut de l'offre : Validée</h3>
+				<i class="glyphicon glyphicon-ok-sign" style="color:green" data-toggle="tooltip" title="Statut de l'offre : Validée"   >          </i>
 			</c:if>
 			<c:if test="${i>=nbValide}">
-				<h3>Statut de l'offre : En attente</h3>
+				<i class="glyphicon glyphicon-repeat gly-spin" style="color:black; " data-toggle="tooltip" title="Statut de l'offre : En Attente"   >          </i>
 			</c:if>
 			</c:if>
+	
+	</div>
+			<h4><c:out value="${listeOffres.get(i).getContenu()}"/></h4>
+			
+			<div style="display: flex; align-content:left;  ">
+		<div style="display: flex; align-content:left;  "><i class="glyphicon glyphicon-calendar" style="color:green" data-toggle="tooltip" title="Date de publication"></i>	&nbsp; <c:out value="${listeOffres.get(i).getDatepublication()}"/></div>
+		&nbsp; &nbsp; &nbsp;
+		<div style="display: flex; align-content:left "><i class="glyphicon glyphicon-calendar" style="color:red" data-toggle="tooltip" title="Date de fin"></i> &nbsp;	<c:out value="${listeOffres.get(i).getDureeoffre()}"/></div>
+			</div>
+			<br/>
 			<div style="display: flex; align-content:left;  ">
 			<form method="get" action="modifAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input class="btn btn-primary" type="submit" value="Modifier l'offre"/></form>
 			&nbsp;
 			<form method="get" action="supAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input class="btn btn-warning" type="submit" value="Supprimer l'offre"/></form>
 			</div>
+			
 			<c:if test="${valeur==listeOffres.get(i).getIdoffre()}">	
 				<form action="modifAnnonceController" method="post">
 					<label for="titreoffre">Titre</label><br/>
