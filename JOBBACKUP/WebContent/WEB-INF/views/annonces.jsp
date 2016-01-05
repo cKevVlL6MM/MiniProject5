@@ -187,6 +187,8 @@
 				
 							<div class="alignement_bloc" style="display: inline-block; padding:10px;">
 							
+							
+							
 						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/>		 </h3>
 						 
 				
