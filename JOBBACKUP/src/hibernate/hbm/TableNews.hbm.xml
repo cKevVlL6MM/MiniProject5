@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 janv. 2016 11:25:45 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="hibernate.model.TableNews" table="TABLE_NEWS" schema="JOBEISTI" optimistic-lock="version">
+        <id name="idnews" type="big_decimal">
+            <column name="IDNEWS" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="titre" type="string">
+            <column name="TITRE" length="200" not-null="true" />
+        </property>
+        <property name="body" type="string">
+            <column name="BODY" length="500" not-null="true" />
+        </property>
+        <property name="datepublication" type="date">
+            <column name="DATEPUBLICATION" length="7" />
+        </property>
+        <property name="nomannonceur" type="string">
+            <column name="NOMANNONCEUR" length="150" />
+        </property>
+    </class>
+</hibernate-mapping>

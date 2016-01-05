@@ -26,6 +26,8 @@
      <script src="Bootstrap/bootstrap.js" type="text/javascript"></script>
  <link href="Bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
  <link href="Bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+ <link href="Bootstrap/jquery-ui.css" rel="stylesheet">
+  
  
 
   
@@ -37,8 +39,8 @@
 <!-- header -->
 		
 
-		<div class="container" style="margin-top: -500px;">
-			<div class="row" style="border-right: 5px solid rgba(17,105,142,1); ">
+		<div class="container" style="margin-top: -500px;"><!-- debut container principal -->
+			<div class="row" style="border-right: 5px solid rgba(17,105,142,1); "><!-- debut row principal -->
 
 <!-- 			right panel -->
 				<aside class="col-xs-3" style="background-color:rgba(17,105,142,1); border-left:lightgrey;">
@@ -105,25 +107,30 @@
 							<br/>
 							
 							
+							<script src="Bootstrap/jquery.js"></script>
+							<script src="Bootstrap/jquery-ui.js"></script>
+							<!-- 
+							<div class="critere-recherche">
+								
+								<label for="datepublication" style="color:white;">Date de publication</label>
+								<input type=" class="datepicker form-control" id="datepublication" name="datepublication">
+							</div>
+							<br/>
+
+
+							<div class="critere-recherche">
+								
+								<label for="dureeoffre" style="color:white;">Date de fin</label><br/>
+								<input type="text" class="datepicker form-control" id="dureeoffre" name="dureeoffre">
+							</div>
 							
-							<div class="critere-recherche">
-								<!-- date de création -->
-								<label for="datepublication" style="color:white;">Date de création</label>
-								
-							</div>
-							<br/>
-
-
-							<div class="critere-recherche">
-								<!-- date de création -->
-								<label for="dureeoffre" style="color:white;">Date de fin</label>
-								
-							</div>
-							<br/>
+							 
+							
+							<br/> -->
 							
 							
 							 <div class="critere-recherche">
-								<!-- mots clés -->
+								
 								<label class="side-search-label" for="titreoffre" style="color:white;">Mots-clés</label>
 								<input class="form-control" id="titreoffre" name="titreoffre" placeholder="Compétences, poste ..." type="text" style="width:250px">
 							</div>
@@ -231,11 +238,41 @@
 				</section>
 				
 				
-			</div>
-		</div>		
+			</div>   <!-- fin row principal -->
+		</div>		<!-- fin container principal -->
 		
-				<!-- footer -->
-		
+				
+		<script>		
+			var availableTags = [
+			  "ActionScript",
+			  "AppleScript",
+			  "Asp",
+			  "BASIC",
+			  "C",
+			  "C++",
+			  "Clojure",
+			  "COBOL",
+			  "ColdFusion",
+			  "Erlang",
+			  "Fortran",
+			  "Groovy",
+			  "Haskell",
+			  "Java",
+			  "JavaScript",
+			  "Lisp",
+			  "Perl",
+			  "PHP",
+			  "Python",
+			  "Ruby",
+			  "Scala",
+			  "Scheme"
+			];
+			
+			
+			$( ".datepicker" ).datepicker({
+			  inline: true
+			});				
+		</script>
 	</body>
 	<c:import url="footer.jsp"/>
 	
