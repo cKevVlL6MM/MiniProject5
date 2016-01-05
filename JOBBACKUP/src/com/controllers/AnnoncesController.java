@@ -69,20 +69,193 @@ public class AnnoncesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public static String doGet(HttpServletRequest request)
+	public static ModelAndView doGet(HttpServletRequest request)
 	{
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
 		
 		if( pl!=null && ( pl.isAdmin() || pl.isEleve() || pl.isEnterprise()))
 		{
 			
+			SessionFactory sf =  HibernateUtil.getSessionFactory();
+			//SessionFactory sessionFactory = createSessionFactory();
+			Session sessions= sf.openSession();
 			
-			return "annonces";
+			Query query=sessions.createQuery("FROM TableOffres");
+			
+			
+			if(!query.list().isEmpty())
+			{
+			
+					
+				ArrayList<RechercheListee> listeAnnonces = new ArrayList<RechercheListee>();
+				ArrayList<TableOffres> listeOffres = new ArrayList<TableOffres>();
+				
+				
+				
+				listeOffres= fill  (query.<TableOffres>list());	
+				
+				
+				
+				
+				
+				
+				
+				int nombreOffres = listeOffres.size();
+				
+				// On remplit la arraylist recherchelistee
+				
+				for(int r=0;r<nombreOffres;r++)
+				{
+					RechercheListee a = new RechercheListee();
+					a.setOffre(listeOffres.get(r));
+					listeAnnonces.add(a);
+				   
+				}
+				
+				
+				
+				
+				
+				
+				// les Identreprises des offres trouv�es sont stock�es l�
+				BigDecimal[] ArrayIDE = new BigDecimal[nombreOffres];
+				
+				//array des idtypesecteurs des offres
+				BigDecimal[] ArrayIDS = new BigDecimal[nombreOffres];
+				
+				//array des idtypesContrat cf sch�ma mld
+				BigDecimal[] ArrayIDC = new BigDecimal[nombreOffres];
+				
+				//array des idniveauminimum
+				BigDecimal[] ArrayINM = new BigDecimal[nombreOffres];
+				
+				
+				//on remplit les array des id, nous chercherons � trouver les noms des secteurs d'activit� � partir des idtypesecteur
+				for(int i=0; i<nombreOffres; i++)
+				{
+					
+					ArrayIDE[i]=listeOffres.get(i).getIdentreprise();
+					System.out.println("identreprise "+ArrayIDE[i].toString());
+					ArrayIDS[i]=listeOffres.get(i).getIdtypesecteur();
+					ArrayIDC[i]=listeOffres.get(i).getIdtypecontrat();
+					System.out.println("identreprise "+ArrayIDE[i].toString());
+					ArrayINM[i]=listeOffres.get(i).getIdniveauminimum();
+				}
+				
+				Query queryIDE = sessions.createQuery("FROM TableEntreprises where IDENTREPRISE IN :ide ").setParameterList("ide", ArrayIDE);
+				
+				//on v�rifie toujours qu'on manipule des listes non vides 
+				if(!queryIDE.list().isEmpty())
+				{
+					
+					for(int j=0; j<queryIDE.list().size(); j++)
+					{
+						RechercheListee b = new RechercheListee();
+					
+							b=listeAnnonces.get(j);
+							TableEntreprises te = (TableEntreprises) queryIDE.list().get(j);
+							b.setEnterprise(te);
+							
+							
+							listeAnnonces.set(j, b);
+							
+							
+						
+										
+					}
+						
+					
+				}
+				
+				Query queryIDS = sessions.createQuery("FROM TableSecteur where IDTYPESECTEUR IN :ids ").setParameterList("ids", ArrayIDS);
+				
+				if(!queryIDS.list().isEmpty())
+				{
+					
+					for(int l=0; l<queryIDS.list().size(); l++)
+					{
+						RechercheListee b2 = new RechercheListee();
+						if(l<listeAnnonces.size())
+						{
+							b2=listeAnnonces.get(l);
+							TableSecteur ts = (TableSecteur) queryIDS.list().get(l);
+							
+							String NomSecteur = ts.getNomsecteur();
+							b2.setNomSecteur(NomSecteur);
+							listeAnnonces.set(l, b2);
+							
+							
+						}
+										
+					}
+						
+					
+				}
+				
+				Query queryIDC = sessions.createQuery("FROM TableTypesContrat where Idtypecontrat IN :idc ").setParameterList("idc", ArrayIDC);
+				
+				if(!queryIDC.list().isEmpty())
+				{
+					
+					for(int m=0; m<queryIDC.list().size(); m++)
+					{
+						RechercheListee b3 = new RechercheListee();
+						if(m<listeAnnonces.size())
+						{
+							b3=listeAnnonces.get(m);
+							TableTypesContrat ttc = (TableTypesContrat)  queryIDC.list().get(m);
+							
+							String NomTypeContrat = ttc.getNomtypecontrat();
+							b3.setNomTypeContrat(NomTypeContrat);
+							listeAnnonces.set(m, b3);
+							
+							
+						}
+										
+					}
+						
+					
+				}
+				Query queryINM = sessions.createQuery("FROM TableClasse where IDCLASSE IN :inm ").setParameterList("inm", ArrayINM);
+				
+				if(!queryINM.list().isEmpty())
+				{
+					
+					for(int n=0; n<queryINM.list().size(); n++)
+					{
+						RechercheListee b4 = new RechercheListee();
+						if(n<listeAnnonces.size())
+						{
+							b4=listeAnnonces.get(n);
+							TableClasse tcl = (TableClasse) queryINM.list().get(n);
+							
+							String NomClasse = tcl.getNomclasse();
+							b4.setNomClasse(NomClasse);
+							listeAnnonces.set(n, b4);
+							
+							
+						}
+										
+					}
+						
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				return new ModelAndView("annonces","listeAnnonces",listeAnnonces);
+				}
+	
 		}
 		else
 		{
-			return "Login";
+			return new ModelAndView("Login");
 		}
+		return new ModelAndView("Login");
 		}
 	
 	

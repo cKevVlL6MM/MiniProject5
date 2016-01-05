@@ -172,13 +172,7 @@ public class ProfileUtilisateur {
 				
 				
 			}
-			
-			
-			
-			
-			
-			
-			
+				
 			
 		}
 		else if(role == roleAdmin)

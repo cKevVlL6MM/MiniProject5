@@ -9,6 +9,7 @@
 <h1>Envoyer la newsletter</h1>
 </center>
 
+
 <form method="post" action="newsletter">
 Sujet : <input name="sujet" rows="1" cols="50"/><br/>
 <textarea name="contenu" rows="10" cols="50">Contenu de la newsletter</textarea><br/>

@@ -92,15 +92,12 @@
 								<label for="idniveauminimum" style="color:white;">Niveau minimum requis</label>
 								<select class="form-control" id="idniveauminimum" name="idniveauminimum">
 									<option value="-1"></option>
-									<option value="1">Développement web</option>
-									<option value="2">Développement logiciel</option>
-									<option value="3">Développement android/Ios/Windows phone</option>
-									<option value="4">Test et vérifications</option>
-									<option value="5">Analyse</option>
-									<option value="6">Systèmes et Réseaux</option>
-									<option value="7">Management/Gestion de projets</option>
-									<option value="8">Aucune compétence requise</option>
-									<option value="9">Autres</option>
+									<option value="1">cpi1</option>
+									<option value="2">cpi2</option>
+									<option value="3">ing1</option>
+									<option value="4">ing2</option>
+									<option value="5">ing3</option>
+									<option value="6">Autres</option>
 								</select>
 							</div>
 
@@ -140,7 +137,11 @@
 
 							<div class="submit-field">
 								<input class="btn btn-primary" type="submit" value="Rechercher">
+							
+							
 							</div>
+							<br/>
+								<a href="annonces" class="btn btn-success">Afficher toutes les annonces</a>
 						</div> <!-- fin content -->
 					</form>
 				</aside>
@@ -161,7 +162,9 @@
         <div class="panel-heading">
           <h4>
            <b>Annonces Trouvées</b>
+          
           </h4>
+           
         </div>
 					<div class="panel-body">
 					<c:forEach var="i" begin="0" end="${(fn:length(listeAnnonces))-1}" step="1">
@@ -183,7 +186,33 @@
 							</div>
 				
 							<div class="alignement_bloc" style="display: inline-block; padding:10px;">
-						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/></h3> <br/>
+							
+						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/>		 </h3>
+						 
+				
+           
+           
+           <form method="get" action="Archiver" >
+           		 <div class="pull-right">
+           		 
+           
+           
+          <button type="submit" style="background-color:transparent; border:none;" title="ajouter aux annonces archivées"  >
+           <span class="glyphicon glyphicon-star" >
+         </span> 
+         </button>
+           </div>
+          </form>
+          
+          
+						 
+						 
+				
+						 
+						 
+						 
+						 
+						  <br/>
 						 <h4><c:out value="${listeAnnonces.get(i).getOffre().getContenu()}"/></h4>	
 				
 								</div>						
