@@ -8,15 +8,117 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mes annonces</title>
+
+
+ <script src="Bootstrap/jquery-2.1.4.js" type="text/javascript"></script>
+ <script src="Bootstrap/creative.js" type="text/javascript"></script>
+  <script src="Bootstrap/jquery.fittext.js" type="text/javascript"></script>
+   <script src="Bootstrap/jquery.easing.min.js" type="text/javascript"></script>
+   <script src="Bootstrap/wow.min.js" type="text/javascript"></script>
+    <link href="Bootstrap/2-col-portfolio.css" rel="stylesheet">
+     <link href="Bootstrap/creative.css" rel="stylesheet">
+      <link href="Bootstrap/animate.min.css" rel="stylesheet">
+        <link href="Bootstrap/bootstrap-theme.css" rel="stylesheet">
+           <link href="Bootstrap/font-awesome.min.css" rel="stylesheet">
+      <link href="Bootstrap/font-awesome.min.css" rel="stylesheet">
+     <script src="Bootstrap/bootstrap.js" type="text/javascript"></script>
+ <link href="Bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+ <link href="Bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+ <link href="Bootstrap/jquery-ui.css" rel="stylesheet">
 </head>
+
+
 <body>
+
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header pull">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand pull-right" href="Accueil">Accueil</a>
+            </div>
+           
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav pull-right">
+                    
+                    <li>
+                        <label style="color:white; margin-top:12px">JOB<span style="color: SteelBlue ">EISTI</span>  </label>
+                    </li>
+                    <li>
+                    
+                        <a href="#"><label data-toggle="tooltip" title="Mes options" data-placement="right" ><i class="glyphicon glyphicon-align-justify"></i></label></a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+<div class="container">
+<div class="page-header">
+  <h1>JOBEISTI : Enterprise <small>Gérer vos annonces</small></h1>
+</div>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+    $("#inserer").hide();
+});
+</script>
+
+
+
+<script  type=text/javascript>
+$(function() {
+$("#ajouter").on('click', (function(){
+   
+
+	$("#inserer").toggle();
+}));
+
+
+
+
+$("#canceller").on('click', (function(){
+	   
+
+	$("#inserer").hide();
+}));
+
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
 	<c:if test="${not empty listeOffres}">
-		<h3 style="text-align: center">Mes annonces</h3>
+	
+	<div class="panel panel-primary" style="width:1000px; margin:10px ">
+	<div class="panel panel-heading">Annonces <div class="pull-right"> <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button>  </div>   </div>
+	
+	
+		
 		<c:forEach var="i" begin="0" end="${(fn:length(listeOffres))-1}" step="1">
-			<h3><c:out value="${listeOffres.get(i).getTitreoffre()}"/></h3>
-			<h3><c:out value="${listeOffres.get(i).getContenu()}"/></h3>
-			<h3><c:out value="${listeOffres.get(i).getDatepublication()}"/></h3>
-			<h3><c:out value="${listeOffres.get(i).getDureeoffre()}"/></h3>
+		<div class="panel panel-body" >
+			<h4><b><c:out value="${listeOffres.get(i).getTitreoffre()}"/></b></h4>
+			<h4><c:out value="${listeOffres.get(i).getContenu()}"/></h4>
+		<div style="display: flex; align-content:left;  "><i class="glyphicon glyphicon-calendar" style="color:green" data-toggle="tooltip" title="Date de publication"></i>	&nbsp; <c:out value="${listeOffres.get(i).getDatepublication()}"/></div>
+		<div style="display: flex; align-content:left "><i class="glyphicon glyphicon-calendar" style="color:red" data-toggle="tooltip" title="Date de fin"></i> &nbsp;	<c:out value="${listeOffres.get(i).getDureeoffre()}"/></div>
 			<c:if test="${not empty nbValide}">
 			<c:if test="${i<nbValide}">
 				<h3>Statut de l'offre : Validée</h3>
@@ -25,16 +127,19 @@
 				<h3>Statut de l'offre : En attente</h3>
 			</c:if>
 			</c:if>
-			<form method="get" action="modifAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input type="submit" value="Modifier l'offre"/></form>
-			<form method="get" action="supAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input type="submit" value="Supprimer l'offre"/></form>
+			<div style="display: flex; align-content:left;  ">
+			<form method="get" action="modifAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input class="btn btn-primary" type="submit" value="Modifier l'offre"/></form>
+			&nbsp;
+			<form method="get" action="supAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input class="btn btn-warning" type="submit" value="Supprimer l'offre"/></form>
+			</div>
 			<c:if test="${valeur==listeOffres.get(i).getIdoffre()}">	
 				<form action="modifAnnonceController" method="post">
 					<label for="titreoffre">Titre</label><br/>
-					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" ><br/>
+					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" /><br/>
 					<label for="contenu">Contenu de l'annonce</label><br/>
 					<textarea name="contenu" rows="5" cols="50"></textarea><br/>
 					<label for="dureeoffre">Fin de l'offre</label><br/>
-					<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy"><br/>
+					<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy" /><br/>
 					<label for="idtypecontrat">Type de Contrat</label><br/>
 					<select class="form-control" id="idtypecontrat" name="idtypecontrat">
 												<option value="-1"></option>
@@ -44,25 +149,47 @@
 												<option value="1">CDD</option>
 												<option value="2">CDI</option>
 												<option value="6">Bénévolat</option>
-											</select><br/>
-					<label for="idniveauminimum">Promotion ciblée</label><br/>
-					<SELECT name="idniveauminimum" size="1" required>
+											</select>
+											<br/>
+					<label for="idniveauminimum">Promotion ciblée</label>
+					<br/>
+					<select name="idniveauminimum" size="1" required>
 						<OPTION value="1">cpi1
 						<OPTION value="2">cpi2
 						<OPTION value="3">ing1
 						<OPTION value="4">ing2
 						<OPTION value="5">ing3
-					</SELECT><br/>
+					</select>
+					<br/>
+					
 					<input type="hidden" name="idOffreActuel" value="${listeOffres.get(i).getIdoffre()}"/>
-					<input type="submit" value="Enregistrer"/>						
+					
+					<input type="submit" class="btn btn-primary" value="Enregistrer"/>		
+							
 				</form>
 			</c:if>	
+			</div>
 	 	</c:forEach> 
+	 	
+	 	</div>
+	 	
+	 	
+	 	
 	</c:if>
 	<c:if test="${empty listeOffres }">
+	
 		<h3 style="text-align: center">Il n'y a pas d'annonce enregistrée</h3>
 	</c:if>
-	<h3>Enregistrer une nouvelle annonce</h3>
+	
+	
+	
+	<div class="panel panel-warning" id="inserer" style="width:500px">  
+	<div class="panel panel-heading">Enregistrer une nouvelle annonce         <div class="pull-right">  <button style="background:transparent; border:none; " id="canceller" data-toggle="tooltip"  title="Annuler" > <i class="glyphicon glyphicon-remove" style="color:red"></i>    </button>  </div>                                                 </div>
+	<div class="panel-body">
+	
+	
+	
+	
 	<form action="creerAnnonceController" method="post">
 		<label for="titreoffre">Titre</label><br/>
 		<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" ><br/>
@@ -88,8 +215,14 @@
 			<OPTION value="4">ing2
 			<OPTION value="5">ing3
 		</SELECT><br/>
-		<input type="submit" value="Enregistrer"/>						
+		<br/>
+		<input type="submit" class="btn btn-primary" value="Enregistrer"/>						
 	</form>
 	
+	</div>
+	
+	
+	</div>
+	</div>
 </body>
 </html>
