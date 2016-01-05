@@ -40,7 +40,7 @@ public class ProfileUtilisateur {
 		if(roleUID!= null)
 	{
 		
-		if(this.roleUID==roleAdmin)
+		if(this.roleUID.equals(roleAdmin))
 		{
 			return true;
 		}

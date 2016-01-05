@@ -32,7 +32,7 @@
 
 	</head>
 	<c:import url="header.jsp"/>
-	<body style="background-color: rgba(173, 216, 230, 0.19);">
+	<body style="background-color: white">
 	
 <!-- header -->
 		
@@ -143,38 +143,47 @@
 
 				<!-- left panel -->
 				
-			<section class="col-xs-9">
+			<section class="col-xs-9" style="margin:0; padding:30px">
 					
 				
 				
 				
 				<c:if test="${not empty listeAnnonces}">
+				
+				 <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+           <b>Annonces Trouvées</b>
+          </h4>
+        </div>
+					<div class="panel-body">
 					<c:forEach var="i" begin="0" end="${(fn:length(listeAnnonces))-1}" step="1">
+					
+					
+					
+				
+                <div class="tab-content">
+                    <div class="tab-pane active" style=" height:600px;
+    overflow-y:scroll;" id="test">
+					
+					
 					
 						<div class="card" style="border: 1px solid darkgrey;
 														background-color: white;
-														margin-top: 90px;">
+														margin-top: 40px;">
 							<div class="alignement_bloc" style="display: inline-block;">
-								<img src="img/LOGO.png" size="40"  alt="logoSociete" class="logoSocieteAnnonce" style="width:100px;
-																											height: 100px;
-																											margin-top: 25px;
-																											margin-bottom: 25px;
-																											margin-right: 20px;
-																											margin-left: 20px;"	>
-							</div>
-							
-							
-							<div class="alignement_bloc" style="display: inline-block;">
-						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/></h3>	
-								<hr style="border-color:darkgrey">
-							
-									<h4><c:out value="${listeAnnonces.get(i).getNomTypeContrat()}"/></h4>
-								</div>	
 								
+							</div>
+				
+							<div class="alignement_bloc" style="display: inline-block; padding:10px;">
+						 <h3><c:out value="${listeAnnonces.get(i).getOffre().getTitreoffre()}"/></h3> <br/>
+						 <h4><c:out value="${listeAnnonces.get(i).getOffre().getContenu()}"/></h4>	
+				
+								</div>						
 								
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/contract11.png" alt="logoTypeContrat" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
-									<c:out value="${listeAnnonces.get(i).getOffre().getContenu()}"/>
+									<c:out value="${listeAnnonces.get(i).getNomTypeContrat()}"/>
 								</div>
 								<div class="alignement_bloc" style="display: inline-block;">
 									<img src="img/suitcase57.png" alt="logoSuitCase" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
@@ -189,11 +198,35 @@
 									<c:out value="${listeAnnonces.get(i).getOffre().getDatepublication()}"/>
 								</div>
 							</div>
-						</div>
+						
+						
+						 
+                    </div>
+                    </div>
+						
+						
+						
 					</c:forEach>
+					</div>
+					</div>
 					</c:if>
 					<c:if test="${empty listeAnnonces }">
 						<h3 style="text-align: center">Il n'y a pas d'annonce disponible</h3>
+						
+						
+    
+    
+    
+    
+                   
+						
+						
+						
+						
+						
+						
+						
+						
 					</c:if>
 				</section>
 				
