@@ -75,6 +75,8 @@ public class AnnoncesController {
 		
 		if( pl!=null && ( pl.isAdmin() || pl.isEleve() || pl.isEnterprise()))
 		{
+			
+			
 			return "annonces";
 		}
 		else

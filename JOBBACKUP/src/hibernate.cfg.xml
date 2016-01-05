@@ -42,5 +42,9 @@
   <mapping resource="hibernate/hbm/UserRole.hbm.xml"/>
   <mapping resource="hibernate/hbm/TableOffresArchivees.hbm.xml"/>
   <mapping class="hibernate.model.TableOffresArchivees"/>
+  <mapping class="hibernate.model.TableNews"/>
+  <mapping class="hibernate.model.TableEvenements"/>
+  <mapping resource="hibernate/hbm/TableEvenements.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableNews.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
