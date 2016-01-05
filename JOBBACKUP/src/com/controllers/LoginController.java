@@ -43,10 +43,30 @@ public class LoginController {
 	private static ServiceRegistry serviceRegistry;
 	
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public static String doGet(HttpServletRequest request)
+	{
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		if(pl!=null)
+		{
+			if(pl.isEleve() || pl.isAdmin() || pl.isEnterprise())
+			{
+				return Redirect(pl.getRoleUID(),request);
+			}
+		}
+		return "Login";
+		
+		
+	}
+	
+	
+	
+	
 	
 	public static String CheckRole(String identifiant, String mdp,HttpServletRequest request) 
 	
 	{
+		
 		
 		SessionFactory sf =  HibernateUtil.getSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
@@ -115,10 +135,6 @@ public static String Redirect(String role, HttpServletRequest request)
 		
 		request.getSession().setAttribute("profileutilisateur", profilEleve);
 		
-		
-		
-		
-		
 		return "AccueilEleve";
 	}
 	else if(role.equals(roleEntreprise))
@@ -127,7 +143,7 @@ public static String Redirect(String role, HttpServletRequest request)
 		
 		request.getSession().setAttribute("profileutilisateur",profilEntreprise);
 		
-		return "AccueilEntreprise";
+		return "AccueilEntreprises";
 	}
 	else if(role.equals(roleAdmin))
 	{
@@ -156,19 +172,22 @@ public static String Redirect(String role, HttpServletRequest request)
 		String EnteredId=logins.getIdentifiant();
 		String EnteredPassword=logins.getPassword();
 		
+		if(EnteredId!=null && EnteredPassword !=null)
 		
-		
-		
+		{
 		String Result = CheckRole(EnteredId,EnteredPassword,request) ;
 		
+		//permet a Result.equals de ne pas retourner une exception null
 		
-		
-			
-		
-		
-		
+		if(!Result.equals("invalid"))
+		{
 		return  Redirect(Result,request);
+		}
 		
+		
+		}
+		
+			return "Login";
 		
 		
 	}

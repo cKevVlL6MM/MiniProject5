@@ -24,6 +24,7 @@ public class ProfileUtilisateur {
 	private TableEntreprises EntrepriseInfo = null;
 	private TableAdmin AdminInfo = null;
 	private ArrayList<BigDecimal> IdAnnoncesArchivees = null;
+	
 	private String roleUID ;
 	
 	
@@ -36,28 +37,37 @@ public class ProfileUtilisateur {
 	
 	public boolean isAdmin()
 	{
+		if(roleUID!= null)
+	{
 		
 		if(this.roleUID.equals(roleAdmin))
 		{
 			return true;
 		}
+	}
 		return false;
 	}
 	
 	public boolean isEleve()
 	{
+		if(roleUID!= null)
+	{
 		if(this.roleUID.equals(roleEleve))
 		{
 			return true;
 		}
+	}
 		return false;
 	}
 	
 	public boolean isEnterprise()
 	{
+		if(roleUID!= null)
+		{
 		if(this.roleUID.equals(roleEntreprise))
 		{
 			return true;
+		}
 		}
 		return false;
 	}
@@ -130,7 +140,7 @@ public class ProfileUtilisateur {
 			
 			
 		}
-		else if(role == roleEntreprise)
+		else if(role.equals(roleEntreprise))
 		{
 			Query query=sessions.createQuery("FROM TableEntreprises WHERE IDUSER = :id ")
 					.setParameter("id", tu.getIduser());
@@ -142,8 +152,8 @@ public class ProfileUtilisateur {
 			}
 			
 			
-			Query query3=sessions.createQuery("FROM TableOffresArchivees WHERE IDUSER = :id ")
-					.setParameter("id", tu.getIduser());
+			Query query3=sessions.createQuery("FROM TableOffres WHERE IDENTREPRISE = :id ")
+					.setParameter("id", this.EntrepriseInfo.getIdentreprise());
 			
 			//listeOffres= fill  (query.<TableOffres>list());	
 			
@@ -153,7 +163,7 @@ public class ProfileUtilisateur {
 				ArrayList<BigDecimal> tempList2 = new ArrayList<BigDecimal>();
 				for(int j=0; j<query3.list().size();j++)
 				{
-					TableOffresArchivees tempOffreArchivee2 = (TableOffresArchivees) query3.list().get(j);
+					TableOffres tempOffreArchivee2 = (TableOffres) query3.list().get(j);
 					tempList2.add(tempOffreArchivee2.getIdoffre());
 					
 					

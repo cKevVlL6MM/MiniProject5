@@ -31,7 +31,7 @@ public class AccueilController {
 		}
 		else if(pl.isEnterprise())
 		{
-			return "AccueilEntreprise";
+			return "AccueilEntreprises";
 		}
 		else
 		{
