@@ -127,7 +127,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="annonces" class="portfolio-box">
+                    <a href="modifAnnonceController" class="portfolio-box">
                         <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">

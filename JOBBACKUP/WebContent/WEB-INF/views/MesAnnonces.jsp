@@ -12,13 +12,13 @@
 <body>
 	<c:if test="${not empty listeOffres}">
 		<h3 style="text-align: center">Mes annonces</h3>
-		<c:forEach var="i" begin="1" end="${fn:length(listeOffres)}" step="1">
-			<h3><c:out value="${listeOffres.getTitreoffre()}"/></h3>
-			<h3><c:out value="${listeOffres.getContenu()}"/></h3>
-			<h3><c:out value="${listeOffres.getDatepublication()}"/></h3>
-			<h3><c:out value="${listeOffres.getDureeoffre()}"/></h3>
-			<form method="post" action="modiferAnnonceController" ><input type="hidden" name="valeur" value="$i"/><input type="submit" value="Modifier l'offre"/></form>
-			<%if((Integer)request.getAttribute("modif"+"$i")==1) { %>
+		<c:forEach var="i" begin="0" end="${(fn:length(listeOffres))-1}" step="1">
+			<h3><c:out value="${listeOffres.get(i).getTitreoffre()}"/></h3>
+			<h3><c:out value="${listeOffres.get(i).getContenu()}"/></h3>
+			<h3><c:out value="${listeOffres.get(i).getDatepublication()}"/></h3>
+			<h3><c:out value="${listeOffres.get(i).getDureeoffre()}"/></h3>
+			<form method="get" action="modifAnnonceController" ><input type="hidden" name="valeur" value="${listeOffres.get(i).getIdoffre()}"/><input type="submit" value="Modifier l'offre"/></form>
+			<c:if test="${valeur==listeOffres.get(i).getIdoffre()}">	
 				<form action="modifAnnonceController" method="post">
 					<label for="titreoffre">Titre</label><br/>
 					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" ><br/>
@@ -44,11 +44,10 @@
 						<OPTION value="4">ing2
 						<OPTION value="5">ing3
 					</SELECT><br/>
-					<input type="hidden" name="idOffreActuel" value="${listeOffres.getIdoffre()}"/>
-					<input type="hidden" name="valeur" value="$i"/>
+					<input type="hidden" name="idOffreActuel" value="${listeOffres.get(i).getIdoffre()}"/>
 					<input type="submit" value="Enregistrer"/>						
 				</form>
-			<% } %>
+			</c:if>	
 	 	</c:forEach> 
 	</c:if>
 	<c:if test="${empty listeOffres }">

@@ -1,18 +1,26 @@
 package com.controllers;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.SimpleTimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.ProfileUtilisateur;
 
@@ -27,7 +35,7 @@ public class AnnonceEntrepriseController {
     }
 	
 	@RequestMapping(value="/creerAnnonceController",method = RequestMethod.POST)
-	protected void creerAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+	protected ModelAndView creerAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
 		model.addAttribute("tableoffres", offre);
 		@SuppressWarnings("deprecation")
@@ -43,28 +51,55 @@ public class AnnonceEntrepriseController {
 		query.setParameter("pTITREOFFRE", offre.getTitreoffre());
 		query.setParameter("pCONTENU", offre.getContenu());
 		query.setParameter("pDUREEOFFRE", offre.getDureeoffre());
-		query.executeUpdate();
-		sessions.close();	
-				
+		query.executeUpdate();	
+		sessions.close();
+		return new ModelAndView("redirect:modifAnnonceController");
 	}	
-		
-	@RequestMapping(value="/modifierAnnonceController",method = RequestMethod.POST)
-	protected String modifierAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
-		request.setAttribute("modif"+request.getAttribute("valeur"),1 );
-		return "MesAnnonces";
-	}
 	
 	@RequestMapping(value="/modifAnnonceController",method = RequestMethod.POST)
-	protected void modifAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+	protected ModelAndView modifAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
 		model.addAttribute("tableoffres", offre);
 		@SuppressWarnings("deprecation")
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
 		Session sessions= sf.openSession();
-		Query query=sessions.createSQLQuery("update TABLE_OFFRES set TITREOFFRE='"+offre.getTitreoffre()+"',CONTENU='"+offre.getContenu()+"',IDTYPEDECONTRAT='"+offre.getIdtypecontrat()+"',DUREEOFFRE='"+offre.getDureeoffre()+"',IDNIVEAUMINIMUM='"+offre.getIdniveauminimum()+"' where IDOFFFRE='"+request.getParameter("idOffreActuel")+"'");
+		Transaction transac = sessions.beginTransaction();
+		int id=Integer.parseInt((String) request.getParameter("idOffreActuel"));
+		Query query=sessions.createSQLQuery("update TABLE_OFFRES set TITREOFFRE='"+offre.getTitreoffre()+"',CONTENU='"+offre.getContenu()+"',IDTYPECONTRAT='"+offre.getIdtypecontrat()+"',DUREEOFFRE=:date,IDNIVEAUMINIMUM='"+offre.getIdniveauminimum()+"' where IDOFFRE=:id");
+		query.setDate("date", offre.getDureeoffre());
+		query.setParameter("id", convertIntToBD(id));
 		query.executeUpdate();
-		sessions.close();	
-		request.setAttribute("modif"+request.getAttribute("valeur"),0 );		
+		transac.commit();
+		sessions.close();
+		request.setAttribute("valeur",null);
+		return new ModelAndView("redirect:modifAnnonceController");
 	}	
+	
+	@RequestMapping(value="/modifAnnonceController",method = RequestMethod.GET)
+	protected ModelAndView redirAnnonces (HttpServletRequest request){
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		if((pl==null)||(!pl.isEnterprise())){
+			return new ModelAndView("Login");
+		}
+		else {
+			SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+			//SessionFactory sessionFactory = createSessionFactory();
+			Session sessions= sf.openSession();
+			Query query=sessions.createSQLQuery("select * from Table_Offres where IDENTREPRISE='"+pl.getEnterpriseInfo().getIdentreprise()+"'").addEntity(TableOffres.class);
+			ArrayList<TableOffres> offres=new ArrayList<TableOffres>();
+			if (!query.list().isEmpty()) {
+				for (int i=0;i<query.list().size();i++){
+					offres.add((TableOffres) query.list().get(i));
+				}
+			}
+			System.out.println(offres.get(0).getTitreoffre());
+			if(request.getParameter("valeur")!=null){
+				request.setAttribute("valeur",request.getParameter("valeur"));
+			}
+			sessions.close();
+			return new ModelAndView("MesAnnonces","listeOffres", offres);
+		}
+	}
+	
 }
