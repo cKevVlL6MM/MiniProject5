@@ -48,5 +48,9 @@
   <mapping resource="hibernate/hbm/TableNews.hbm.xml"/>
   <mapping class="hibernate.model.TableOffresAttentes"/>
   <mapping resource="hibernate/hbm/TableOffresAttentes.hbm.xml"/>
+  <mapping class="hibernate.model.TableDocuments"/>
+  <mapping class="hibernate.model.TableArchive"/>
+  <mapping resource="hibernate/hbm/TableArchive.hbm.xml"/>
+  <mapping resource="hibernate/hbm/TableDocuments.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
