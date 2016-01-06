@@ -194,13 +194,13 @@
 				
            
            
-           <form method="get" action="Archiver" >
+           <form method="get" action="Archivage" >
            		 <div class="pull-right">
-           		 
+           		 <input type="hidden" name="idoffrechoisie" id="idoffrechoisie" value="${listeAnnonces.get(i).getOffre().getIdoffre() }">
            
            
-          <button type="submit" style="background-color:transparent; border:none;" title="ajouter aux annonces archivées"  >
-           <span class="glyphicon glyphicon-star" >
+          <button type="submit" style="background-color:transparent; border:none;" data-toggle="tooltip" title="ajouter aux annonces archivées"  >
+           <span class="glyphicon glyphicon-pushpin" >
          </span> 
          </button>
            </div>
