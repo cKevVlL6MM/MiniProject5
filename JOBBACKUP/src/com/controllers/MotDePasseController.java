@@ -44,7 +44,7 @@ public class MotDePasseController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	protected ModelAndView inscriptionValidation(ModelMap model,HttpServletRequest request) {
+	protected ModelAndView reinitMDP(ModelMap model,HttpServletRequest request) {
 		
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 		//SessionFactory sessionFactory = createSessionFactory();
@@ -68,14 +68,14 @@ public class MotDePasseController {
 				}
 			});
 		java.math.BigDecimal id=convertIntToBD(-1);
-		if(querytestEleve.list()!=null){
+		if(!querytestEleve.list().isEmpty()){
 			id=(BigDecimal) querytestEleve.list().get(0);
 		}
-		else if(querytestEntreprise!=null) {
+		else if(!querytestEntreprise.list().isEmpty()) {
 			id=(BigDecimal) querytestEntreprise.list().get(0);		
 		}
 	
-		if((querytestEleve.list()!=null)&&(querytestEntreprise!=null)) {
+		if((!querytestEleve.list().isEmpty())||(!querytestEntreprise.list().isEmpty())) {
 			try {
 				Message message = new MimeMessage(session);
 				message.setFrom(new InternetAddress("jobeisti@gmail.com"));
