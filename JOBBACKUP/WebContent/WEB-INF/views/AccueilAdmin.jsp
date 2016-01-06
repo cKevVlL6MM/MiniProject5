@@ -127,7 +127,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="annonces" class="portfolio-box">
+                    <a href="newsletter" class="portfolio-box">
                         <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -142,7 +142,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="gererAnnonceAdmin" class="portfolio-box">
                         <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -150,7 +150,7 @@
                                     
                                 </div>
                                 <div class="project-name">
-                                  Données du site web
+                                  Gerer les annonces
                                 </div>
                             </div>
                         </div>
