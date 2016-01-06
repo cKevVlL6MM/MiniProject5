@@ -25,15 +25,40 @@
       <link href="Bootstrap/font-awesome.min.css" rel="stylesheet">
      <script src="Bootstrap/bootstrap.js" type="text/javascript"></script>
  <link href="Bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
- <link href="Bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+ 
  <link href="Bootstrap/jquery-ui.css" rel="stylesheet">
   
  
 
+
+
   
 
 	</head>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<c:import url="header.jsp"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<body style="background-color: white">
 	
 <!-- header -->
