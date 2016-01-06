@@ -119,7 +119,7 @@ $("#canceller").on('click', (function(){
 	
 	
 	
-	     <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button>  </div>   </div>
+	      </div>   </div>
 	
 	
 		

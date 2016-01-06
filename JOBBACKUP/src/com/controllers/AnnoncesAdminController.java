@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,8 +64,42 @@ public class AnnoncesAdminController {
 		}
 	}
 	
-	//@RequestMapping(value="/validAnnonceController",method = RequestMethod.POST)
-	
+	@RequestMapping(value="/validAnnonceController",method = RequestMethod.POST)
+	protected ModelAndView validAnnonce(@ModelAttribute("tableoffres")TableOffres offre, ModelMap model, HttpServletRequest request){
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		model.addAttribute("tableoffres", offre);
+		@SuppressWarnings("deprecation")
+		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+		//SessionFactory sessionFactory = createSessionFactory();
+		Session sessions= sf.openSession();
+		Transaction transac = sessions.beginTransaction();
+		int id=Integer.parseInt((String) request.getParameter("valeur"));
+		Query query=sessions.createSQLQuery("select * from TABLE_OFFRES_ATTENTES where IDOFFRE=:id").addEntity(TableOffresAttentes.class);
+		query.setParameter("id", convertIntToBD(id));
+		offre=(TableOffresAttentes) query.list().get(0);
+		Query query4=sessions.createSQLQuery("INSERT INTO TABLE_OFFRES (IDOFFRE,IDENTREPRISE,IDTYPECONTRAT, IDTYPESECTEUR, "
+				+ "IDTYPECOMPETENCE, IDNIVEAUMINIMUM, TITREOFFRE, CONTENU, DATEPUBLICATION, DUREEOFFRE  ) "
+				+"VALUES (:pIDOFFRE, :pIDENTREPRISE, :pIDTYPECONTRAT, :pIDTYPESECTEUR, :pIDTYPECOMPETENCE, "
+				+ ":pIDNIVEAUMINIMUM, :pTITREOFFRE, :pCONTENU, SYSDATE, :pDUREEOFFRE)");
+		query4.setParameter("pIDOFFRE", convertIntToBD(id));
+		query4.setParameter("pIDENTREPRISE",offre.getIdentreprise());
+		query4.setParameter("pIDTYPECONTRAT", offre.getIdtypecontrat());
+		query4.setParameter("pIDTYPESECTEUR",offre.getIdtypesecteur() );
+		query4.setParameter("pIDTYPECOMPETENCE",convertIntToBD(1));
+		query4.setParameter("pIDNIVEAUMINIMUM", offre.getIdniveauminimum());
+		query4.setParameter("pTITREOFFRE", offre.getTitreoffre());
+		query4.setParameter("pCONTENU", offre.getContenu());
+		query4.setParameter("pDUREEOFFRE", offre.getDureeoffre());
+		query4.executeUpdate();
+		Query query2=sessions.createSQLQuery("delete TABLE_OFFRES_ATTENTES where IDOFFRE=:id");
+		query2.setParameter("id", convertIntToBD(id));
+		query2.executeUpdate();
+		
+		transac.commit();
+		sessions.close();
+		request.setAttribute("valeur",null);
+		return new ModelAndView("redirect:gererAnnonceAdmin");
+	}
 
 	@RequestMapping(value="/refusAnnonceController",method = RequestMethod.POST)
 	protected ModelAndView refAnnonces (@ModelAttribute("tableoffres")TableOffres offre, ModelMap model,HttpServletRequest request){
