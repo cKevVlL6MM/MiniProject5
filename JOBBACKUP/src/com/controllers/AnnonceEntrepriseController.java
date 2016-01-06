@@ -67,10 +67,36 @@ public class AnnonceEntrepriseController {
 		Session sessions= sf.openSession();
 		Transaction transac = sessions.beginTransaction();
 		int id=Integer.parseInt((String) request.getParameter("idOffreActuel"));
-		Query query=sessions.createSQLQuery("update TABLE_OFFRES set TITREOFFRE='"+offre.getTitreoffre()+"',CONTENU='"+offre.getContenu()+"',IDTYPECONTRAT='"+offre.getIdtypecontrat()+"',DUREEOFFRE=:date,IDNIVEAUMINIMUM='"+offre.getIdniveauminimum()+"' where IDOFFRE=:id");
+		
+		Query query3=sessions.createSQLQuery("select * from TABLE_OFFRES where IDOFFRE=:id");
+		query3.setParameter("id", convertIntToBD(id));
+		if(!query3.list().isEmpty()) {
+			Query query4=sessions.createSQLQuery("INSERT INTO TABLE_OFFRES_ATTENTES (IDOFFRE,IDENTREPRISE,IDTYPECONTRAT, IDTYPESECTEUR, "
+					+ "IDTYPECOMPETENCE, IDNIVEAUMINIMUM, TITREOFFRE, CONTENU, DATEPUBLICATION, DUREEOFFRE  ) "
+					+"VALUES (:pIDOFFRE, :pIDENTREPRISE, :pIDTYPECONTRAT, :pIDTYPESECTEUR, :pIDTYPECOMPETENCE, "
+					+ ":pIDNIVEAUMINIMUM, :pTITREOFFRE, :pCONTENU, SYSDATE, :pDUREEOFFRE)");
+			query4.setParameter("pIDOFFRE", convertIntToBD(id));
+			query4.setParameter("pIDENTREPRISE",pl.getEnterpriseInfo().getIdentreprise());
+			query4.setParameter("pIDTYPECONTRAT", offre.getIdtypecontrat());
+			query4.setParameter("pIDTYPESECTEUR", pl.getEnterpriseInfo().getIdtypesecteur());
+			query4.setParameter("pIDTYPECOMPETENCE",convertIntToBD(1));
+			query4.setParameter("pIDNIVEAUMINIMUM", offre.getIdniveauminimum());
+			query4.setParameter("pTITREOFFRE", offre.getTitreoffre());
+			query4.setParameter("pCONTENU", offre.getContenu());
+			query4.setParameter("pDUREEOFFRE", offre.getDureeoffre());
+			query4.executeUpdate();
+			Query query2=sessions.createSQLQuery("delete TABLE_OFFRES where IDOFFRE=:id");
+			query2.setParameter("id", convertIntToBD(id));
+			query2.executeUpdate();
+		}
+		
+		else {
+		Query query=sessions.createSQLQuery("update TABLE_OFFRES_ATTENTES set TITREOFFRE='"+offre.getTitreoffre()+"',CONTENU='"+offre.getContenu()+"',IDTYPECONTRAT='"+offre.getIdtypecontrat()+"',DUREEOFFRE=:date,IDNIVEAUMINIMUM='"+offre.getIdniveauminimum()+"' where IDOFFRE=:id");
 		query.setDate("date", offre.getDureeoffre());
 		query.setParameter("id", convertIntToBD(id));
 		query.executeUpdate();
+
+		}
 		transac.commit();
 		sessions.close();
 		request.setAttribute("valeur",null);
@@ -87,9 +113,18 @@ public class AnnonceEntrepriseController {
 		Session sessions= sf.openSession();
 		Transaction transac = sessions.beginTransaction();
 		int id=Integer.parseInt((String) request.getParameter("valeur"));
-		Query query=sessions.createSQLQuery("delete from TABLE_OFFRES where IDOFFRE=:id");
-		query.setParameter("id", convertIntToBD(id));
-		query.executeUpdate();
+		Query query3=sessions.createSQLQuery("select * from TABLE_OFFRES where IDOFFRE=:id");
+		query3.setParameter("id", convertIntToBD(id));
+		if(!query3.list().isEmpty()) {
+			Query query=sessions.createSQLQuery("delete from TABLE_OFFRES where IDOFFRE=:id");
+			query.setParameter("id", convertIntToBD(id));
+			query.executeUpdate();
+		}
+		else {
+			Query query2=sessions.createSQLQuery("delete from TABLE_OFFRES_ATTENTES where IDOFFRE=:id");
+			query2.setParameter("id", convertIntToBD(id));
+			query2.executeUpdate();
+		}
 		transac.commit();
 		sessions.close();
 		request.setAttribute("valeur",null);
