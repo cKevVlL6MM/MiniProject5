@@ -32,7 +32,6 @@ public class NewsletterController {
 	@RequestMapping(method = RequestMethod.POST)
 	protected void sendEmail(@ModelAttribute("mail")Mail mail, ModelMap model){
 		model.addAttribute("mail", mail);
-		System.out.println(mail.getContenu());
 		Date today=new Date();
 		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yy");
 		Properties props = new Properties();
