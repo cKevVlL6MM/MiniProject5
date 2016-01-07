@@ -86,7 +86,7 @@ public class DocumentUploadController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView uploadDocument(HttpServletRequest request) {
 	ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
-	if((pl==null)||(!pl.isAdmin())){
+	if((pl==null)||((!pl.isAdmin())&&(!pl.isEnterprise()))){
 		return new ModelAndView("Login");
 	}
 	else {
