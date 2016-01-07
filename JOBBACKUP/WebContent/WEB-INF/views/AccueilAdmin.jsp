@@ -35,8 +35,8 @@
 
 <body>
 
-<a href="addEvent">chibre</a>
-
+<a href="addEvent">ajoutEvent</a>
+<a href="stat">Statistique</a>
 	<a href="documentUpload">Upload</a>
 	<a href="documentDownload">Download</a>
 	

@@ -106,7 +106,10 @@ public class AnnonceEntrepriseController {
 	@RequestMapping(value="/supAnnonceController",method = RequestMethod.GET)
 	protected ModelAndView supAnnonces (@ModelAttribute("tableoffres")TableOffres offre, ModelMap model,HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
-		
+		if((pl==null)||((!pl.isEnterprise())&&(!pl.isAdmin()))){
+			return new ModelAndView("Login");
+		}
+		else {
 		model.addAttribute("tableoffres", offre);
 		@SuppressWarnings("deprecation")
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
@@ -130,6 +133,7 @@ public class AnnonceEntrepriseController {
 		sessions.close();
 		request.setAttribute("valeur",null);
 		return new ModelAndView("redirect:modifAnnonceController");
+		}
 	}
 	
 	
