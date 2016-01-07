@@ -14,14 +14,18 @@
 
 
 
-
-
 <mvc:annotation-driven/>
 <mvc:view-controller path="/" view-name="Login"/>
 <mvc:resources mapping="/Bootstrap/**" location="/Resources/Bootstrap/" />
 <mvc:resources mapping="/img/**" location="/Resources/img/" />
 <mvc:resources mapping="/fonts/**" location="/Resources/Bootstrap/fonts/" />
    <context:component-scan base-package="com.controllers" />
+
+
+
+
+
+
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/views/" />
