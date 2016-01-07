@@ -123,10 +123,10 @@
     <h3>Nombre d'offres disponibles à ce jour :</h3> &nbsp; <h3><c:out value="${nombreOffres}"/></h3>
      </div>
      </div>
-    <c:if test="${not empty inscritsURL}">
-    <img alt="stat" src="${inscritsURL}">
+    <c:if test="${not empty inscritURL}">
+    <img alt="stat" src="${inscritURL}">
     </c:if>
-    <c:if test="${empty inscritsURL}">
+    <c:if test="${empty inscritURL}">
     Pas de statistiques disponibles (une connexion internet est obligatoire pour le google charts API)
     </c:if>
     

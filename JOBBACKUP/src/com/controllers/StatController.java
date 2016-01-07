@@ -77,8 +77,8 @@ public class StatController {
 				
 						if(nombreInscrits!=0)
 						{
-							 percentEleve= (nombreEleves / nombreInscrits)*100;
-							percentEntreprise = (nombreEnterprises / nombreInscrits)*100;
+							 percentEleve= (nombreEleves*100 / nombreInscrits);
+							percentEntreprise = (nombreEnterprises*100 / nombreInscrits);
 							
 									
 						}
@@ -88,22 +88,23 @@ public class StatController {
 			}
 			
 			//creation diagramme pie pour inscriptions
+			
 			Slice s1 = Slice.newSlice(percentEleve, Color.BEIGE,"Eleves "+percentEleve+" %");
 			Slice s2 = Slice.newSlice(percentEntreprise, Color.newColor("951800"),"Enterprises "+percentEntreprise+" %");
 			PieChart chart = GCharts.newPieChart(s1, s2);
-	        chart.setTitle("Nombre des Inscrits");
+	        chart.setTitle("Statistique des inscrits");
 	        chart.setSize(480, 200);
-	        
+	        chart.setThreeD(true);
 	        
 	        model.addAttribute("nombreOffres", nombreOffres);
 			model.addAttribute("nombreInscrits", nombreInscrits );
-	        model.addAttribute("inscritsURL",chart.toURLString());
+	        model.addAttribute("inscritURL",chart.toURLString());
 	        
 	        
 	        
 	        //stat mois par mois
 
-			Query query2=sessions.createSQLQuery("select to_char(DATESTAT,'Mon-yyyy') \"Date\", sum(NOMBREOFFRES) \"NombreOffres\", sum(NOMBREELEVES) \"NombreEleves\", sum(NOMBREENTREPRISE) \"NombreEntreprises\", sum(NOMBREINSCRITS) as \"NombreInscrits\"  from TABLE_STATISTIQUE group by to_char(DATESTAT,'Mon-yyyy') order by to_char(DATESTAT,'Mon-yyyy') ")
+			Query query2=sessions.createSQLQuery("select to_char(DATESTAT,'Mon-yyyy') \"Date\", MAX(NOMBREOFFRES) \"NombreOffres\", MAX(NOMBREELEVES) \"NombreEleves\", MAX(NOMBREENTREPRISE) \"NombreEntreprises\", MAX(NOMBREINSCRITS) as \"NombreInscrits\"  from TABLE_STATISTIQUE group by to_char(DATESTAT,'Mon-yyyy') order by to_char(DATESTAT,'Mon-yyyy') ")
 					.addScalar("NombreInscrits", LongType.INSTANCE)
 					.addScalar("NombreOffres", LongType.INSTANCE)
 					.addScalar("NombreEleves", LongType.INSTANCE)
@@ -114,7 +115,8 @@ public class StatController {
 			if(!query2.list().isEmpty())
 			{
 				List<Object[]> rows = query2.list();
-				int MaxVal=0;
+				List<Integer> MaxValList = new ArrayList();
+				
 				List<List<Integer>> datalist = new ArrayList();
 				List<String> MonthList = new ArrayList();
 				
@@ -133,25 +135,66 @@ public class StatController {
 				for(int g=0; g<query2.list().size();g++)
 				{
 					dataForOne.add(Integer.parseInt((rows.get(g)[m].toString()) ));	
-					MaxVal=Integer.parseInt((rows.get(g)[m].toString()) )+MaxVal;
-					System.out.println(Integer.parseInt((rows.get(g)[m].toString() )));
+					
+					
 				}
 				
 				datalist.add(dataForOne);
 				}
 				
+				for(int g=0;g<query2.list().size();g++)
+				{	
+				 int MaxVal=0;
+					for(int d=0; d<4;d++)
+					{
+					
+					MaxVal=datalist.get(d).get(g)+MaxVal;
+					}
+					MaxValList.add(MaxVal);
+					
+				}
+			
+				// taille de la plus grande colonne
+				int MaxColonne=0;
+				for(int z=0;z<MaxValList.size();z++)
+				{
+					if(MaxValList.get(z) >= MaxColonne)
+					{
+						MaxColonne=MaxValList.get(z);
+					}
+				}
+				int maxData=0;
+						for(int r=0;r<query2.list().size();r++)
+						{	
+						
+							for(int d=0; d<4;d++)
+							{
+							
+							int Value=datalist.get(d).get(r);
+							
+							if(Value > maxData)
+							{
+								maxData=Value;
+							}
+							
+							}
+							
+							
+						}
 				
+						
+				Data d1 = DataUtil.scaleWithinRange(0, MaxColonne,datalist.get(0));
+				Data d2 = DataUtil.scaleWithinRange(0, MaxColonne,datalist.get(1));
+				Data d3 = DataUtil.scaleWithinRange(0, MaxColonne,datalist.get(2));
+				Data d4 = DataUtil.scaleWithinRange(0, MaxColonne,datalist.get(3));
 			
 				
 				
 				
-				
-				
-				
-				BarChartPlot BarInscrits = Plots.newBarChartPlot(Data.newData(datalist.get(0)), Color.AQUAMARINE, "Inscrits");
-				BarChartPlot BarOffers = Plots.newBarChartPlot(Data.newData(datalist.get(1)), Color.CHOCOLATE , "Offres");	
-				BarChartPlot BarEleves = Plots.newBarChartPlot(Data.newData(datalist.get(2)), Color.TOMATO , "Eleves");		
-				BarChartPlot BarEntreprises = Plots.newBarChartPlot(Data.newData(datalist.get(3)), Color.GRAY , "Entreprises");				
+				BarChartPlot BarInscrits = Plots.newBarChartPlot(d1, Color.newColor("003366"), "Inscrits");
+				BarChartPlot BarOffers = Plots.newBarChartPlot(d2, Color.CHOCOLATE , "Offres");	
+				BarChartPlot BarEleves = Plots.newBarChartPlot(d3, Color.TOMATO , "Eleves");		
+				BarChartPlot BarEntreprises = Plots.newBarChartPlot(d4, Color.GRAY , "Entreprises");				
 				BarChart chartHistoriques = GCharts.newBarChart(BarInscrits, BarOffers , BarEleves, BarEntreprises);
 				
 				 AxisLabels Nombre = AxisLabelsFactory.newAxisLabels("Nombre", 10);
@@ -162,10 +205,9 @@ public class StatController {
 				 
 				 
 				 
-				 
-				 
+							 
 				 chartHistoriques.addXAxisLabels(AxisLabelsFactory.newAxisLabels(MonthList));
-				 chartHistoriques.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0,10,2));
+				 chartHistoriques.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, MaxColonne, 1));
 				 chartHistoriques.addYAxisLabels(Nombre);
 				 chartHistoriques.addXAxisLabels(Mois);
 
@@ -174,7 +216,7 @@ public class StatController {
 				 chartHistoriques.setSpaceWithinGroupsOfBars(20);
 				 chartHistoriques.setDataStacked(true);
 				 chartHistoriques.setTitle("Statistiques mois par mois", Color.BLACK, 16);
-				 chartHistoriques.setGrid(100, 10, 3, 2);
+				 
 				 chartHistoriques.setBackgroundFill(Fills.newSolidFill(Color.WHITE));
 			        LinearGradientFill fill = Fills.newLinearGradientFill(0, Color.LAVENDER, 100);
 			        fill.addColorAndOffset(Color.WHITE, 0);
