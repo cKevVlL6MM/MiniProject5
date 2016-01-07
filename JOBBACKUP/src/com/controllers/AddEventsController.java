@@ -64,11 +64,12 @@ public class AddEventsController {
 			Query query2 = sessions.createSQLQuery("Select * FROM Table_Evenements WHERE datefin >= sysdate ORDER BY datedebut asc").addEntity(TableEvenements.class);
 			
 			ArrayList<TableEvenements> listEvents = new ArrayList<TableEvenements>();
-			for (int i=0;i<query2.list().size();i++){
-				listEvents.add((TableEvenements) query2.list().get(i));
+			if(!query2.list().isEmpty()){
+				for (int i=0;i<query2.list().size();i++){
+					listEvents.add((TableEvenements) query2.list().get(i));
+				}
+				request.setAttribute("listEvents", listEvents);
 			}
-			
-			request.setAttribute("listEvents", listEvents);
 			
 			return new ModelAndView("AccueilAdmin");
 		}

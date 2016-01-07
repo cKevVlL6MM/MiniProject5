@@ -110,6 +110,7 @@
 				       <td>Début</td>
 				       <td>Fin</td>
 				   </tr>
+				   <c:if test="${not empty listEvents }">
 				<c:forEach var="i" begin="0" end="${(fn:length(listEvents))-1}" step="1">
 				   <tr>
 					<td><c:out value="${listEvents.get(i).getNomevenement()}"/></td>
@@ -117,6 +118,7 @@
 					<td><c:out value="${listEvents.get(i).getDatefin()}"/></td>
 				   </tr>
 				   </c:forEach>
+				   </c:if>
 			</table>
                     
                     

@@ -31,10 +31,12 @@ public class AccueilController {
 		Query query = sessions.createSQLQuery("Select * FROM Table_Evenements WHERE datefin >= sysdate ORDER BY datedebut asc").addEntity(TableEvenements.class);
 		
 		ArrayList<TableEvenements> listEvents = new ArrayList<TableEvenements>();
+		if(!query.list().isEmpty()){
 		for (int i=0;i<query.list().size();i++){
 			listEvents.add((TableEvenements) query.list().get(i));
 		}
 		request.setAttribute("listEvents", listEvents);
+		}
 		
 		
 		if(pl.isEleve())
