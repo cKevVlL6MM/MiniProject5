@@ -20,11 +20,10 @@ public class ProfileUtilisateur {
 
 	// par mesure de securite les info de login ne sont pas stock�es dans une instance de cette classe
 	private TableUtilisateurs userInfo;
-	private TableEleve EleveInfo = null;
-	private TableEntreprises EntrepriseInfo = null;
-	private TableAdmin AdminInfo = null;
-	private ArrayList<BigDecimal> IdAnnoncesArchivees = null;
-	
+	private TableEleve EleveInfo;
+	private TableEntreprises EntrepriseInfo;
+	private TableAdmin AdminInfo;
+	private ArrayList<BigDecimal> IdAnnoncesArchivees = new ArrayList<BigDecimal>();	
 	private String roleUID ;
 	
 	
@@ -102,7 +101,7 @@ public class ProfileUtilisateur {
 		//SessionFactory sessionFactory = createSessionFactory();
 		Session sessions= sf.openSession();
 		
-		if(role == roleEleve)
+		if(role.equals(roleEleve))
 		{
 			
 			Query query=sessions.createQuery("FROM TableEleve WHERE IDUSER = :id ")
@@ -114,9 +113,12 @@ public class ProfileUtilisateur {
 				this.EleveInfo=tempEleve;
 			}
 			
-			Query query2=sessions.createQuery("FROM TableOffresArchivees WHERE IDUSER = :id ")
+			Query query2=sessions.createSQLQuery("select * FROM TABLE_OFFRES_ARCHIVEES WHERE IDUSER = :id ")
+					.addEntity(TableOffresArchivees.class)
 					.setParameter("id", tu.getIduser());
+
 			
+		
 			//listeOffres= fill  (query.<TableOffres>list());	
 			
 			//si l'eleve a archivé des annonces
@@ -125,13 +127,12 @@ public class ProfileUtilisateur {
 				ArrayList<BigDecimal> tempList = new ArrayList<BigDecimal>();
 				for(int i=0; i<query2.list().size();i++)
 				{
+					
 					TableOffresArchivees tempOffreArchivee = (TableOffresArchivees) query2.list().get(i);
-					tempList.add(tempOffreArchivee.getIdoffre());
+					this.IdAnnoncesArchivees.add(tempOffreArchivee.getIdoffre());
 					
 					
 				}
-				this.setIdAnnoncesArchivees(tempList);
-				
 				
 			}
 			
@@ -152,33 +153,8 @@ public class ProfileUtilisateur {
 			}
 			
 			
-			Query query3=sessions.createQuery("FROM TableOffres WHERE IDENTREPRISE = :id ")
-					.setParameter("id", this.EntrepriseInfo.getIdentreprise());
 			
-			//listeOffres= fill  (query.<TableOffres>list());	
-			
-			//si l'eleve a archivé des annonces
-			if(!query3.list().isEmpty())
-			{
-				ArrayList<BigDecimal> tempList2 = new ArrayList<BigDecimal>();
-				for(int j=0; j<query3.list().size();j++)
-				{
-					TableOffres tempOffreArchivee2 = (TableOffres) query3.list().get(j);
-					tempList2.add(tempOffreArchivee2.getIdoffre());
-					
-					
-				}
-				this.setIdAnnoncesArchivees(tempList2);
 				
-				
-			}
-			
-			
-			
-			
-			
-			
-			
 			
 		}
 		else if(role == roleAdmin)

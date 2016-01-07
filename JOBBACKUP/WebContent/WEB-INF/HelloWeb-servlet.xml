@@ -14,8 +14,6 @@
 
 
 
-
-
 <mvc:annotation-driven/>
 <mvc:view-controller path="/" view-name="Login"/>
 <mvc:resources mapping="/Bootstrap/**" location="/Resources/Bootstrap/" />
@@ -23,9 +21,22 @@
 <mvc:resources mapping="/fonts/**" location="/Resources/Bootstrap/fonts/" />
    <context:component-scan base-package="com.controllers" />
 
+
+
+
+
+
+
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/views/" />
       <property name="suffix" value=".jsp" />
    </bean>
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="250000" />
+ 
+    </bean>
  
 </beans>

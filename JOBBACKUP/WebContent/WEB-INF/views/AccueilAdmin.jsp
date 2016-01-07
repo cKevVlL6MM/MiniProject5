@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     
 
-    <title>Accueil</title>
+    <title>Accueil Admin</title>
 
   <script src="Bootstrap/jquery-2.1.4.js" type="text/javascript"></script>
  <script src="Bootstrap/creative.js" type="text/javascript"></script>
@@ -36,7 +36,9 @@
 <body>
 
 
-
+	<a href="documentUpload">Upload</a>
+	<a href="documentDownload">Download</a>
+	
 
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -58,7 +60,7 @@
                     <li>
                         <label style="color:white; margin-top:12px">JOB<span style="color: SteelBlue ">EISTI</span>  </label>
                     </li>
-                     <li>
+                    <li>
                &nbsp;
                        <button type="button" style="margin-top:10px;font-size: 20px; color:white; background-color:transparent; border:none"  class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown" title="Mes options" >
                        </button>  <ul class="dropdown-menu">
@@ -93,18 +95,19 @@
     </nav>
 
 
+
 <section class="container" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 text-center">
                  <img src="<c:url value="img/LOGO.png"/>" class="img-responsive" alt="">
-                    <h2 class="section-heading">Votre passerelle vers le monde du travail </h2>
+                    <h2 class="section-heading">Admin : Gestion de l'application actuelle</h2>
                     <hr class="light">
                     
                     
                 </div>
                 <div class="col-lg-8 ">
-              ESPACE ENTREPRISE
+               Réservé : Actu
                     
                     
                 </div>
@@ -150,30 +153,30 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="modifAnnonceController" class="portfolio-box">
+                    <a href="newsletter" class="portfolio-box">
                         <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Annonces
+                                   Newsletter
                                 </div>
                                 <div class="project-name">
-                                   Consulter mes annonces
+                                   Gérer les newsletters
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="gererAnnonceAdmin" class="portfolio-box">
                         <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    MyJOBEisti
+                                    
                                 </div>
                                 <div class="project-name">
-                                   Ajouter des documents
+                                  Gerer les annonces
                                 </div>
                             </div>
                         </div>
@@ -188,7 +191,7 @@
                                     Actualité et événements 
                                 </div>
                                 <div class="project-name">
-                                   Suivez les événements de nos partenaires 
+                                  Ajouter des news ou des documents
                                 </div>
                             </div>
                         </div>

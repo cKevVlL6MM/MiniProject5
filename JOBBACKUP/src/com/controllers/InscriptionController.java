@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,15 +39,9 @@ public class InscriptionController  {
 	
 	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
-	/*	
-	@RequestMapping(method = RequestMethod.GET)
-	   public ModelAndView student() {
-	    Registration usermodel=new Registration();
-	      return new ModelAndView("registration", "registration",usermodel);
-	   }
-	*/
+
 	@RequestMapping(method = RequestMethod.POST)
-	protected void inscriptionValidation(@ModelAttribute("registration") Registration user, ModelMap model) {
+	protected ModelAndView inscriptionValidation(@ModelAttribute("registration") Registration user, ModelMap model,HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		model.addAttribute("registration", user);
 		
@@ -92,6 +88,10 @@ public class InscriptionController  {
 			query.setParameter("pMOTDEPASSE", user.getPassword());
 			query.executeUpdate();
 			sessions.close();	
+			request.setAttribute("messageSuccess", "Inscription validée");
+			}
+			else {
+				request.setAttribute("messageError", "Adresse mail déjà utilisée ou erreur de saisie");
 			}
 			
 		}
@@ -145,9 +145,13 @@ public class InscriptionController  {
 			query.setParameter("pTELEPHONE", user.getTelephone());
 			query.executeUpdate();
 			sessions.close();	
+			request.setAttribute("messageSuccess", "Inscription validée");
+			}
+		else {
+			request.setAttribute("messageError", "Adresse mail déjà utilisée ou erreur de saisie");
 			}
 		}
-		
+		return new ModelAndView("Login");
 		
 	}
 	

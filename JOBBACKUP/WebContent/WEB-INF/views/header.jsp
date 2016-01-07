@@ -7,7 +7,6 @@
 <title>navbar</title>
 </head>
 <body>
-    
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -20,18 +19,47 @@
                 </button>
                 <a class="navbar-brand pull-right" href="Accueil">Accueil</a>
             </div>
+           
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav pull-right">
+                    
                     <li>
                         <label style="color:white; margin-top:12px">JOB<span style="color: SteelBlue ">EISTI</span>  </label>
                     </li>
                     <li>
-                        <a href="#"><label data-toggle="tooltip" title="Mes options" data-placement="right" ><i class="glyphicon glyphicon-align-justify"></i></label></a>
+               &nbsp;
+                       <button type="button" style="margin-top:10px;font-size: 20px; color:white; background-color:transparent; border:none"  class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown" title="Mes options" >
+                       </button>  <ul class="dropdown-menu">
+    <li>
+    
+    <div style="display: flex; align-content:left ">
+       <i class="glyphicon glyphicon-erase"></i>&nbsp;
+    <a href="motdepasse" style="color:black;">Reinitialiser mot de passe</a>
+    </div>
+    </li>
+    
+    <li>
+    
+     <div style="display: flex; align-content:left ">
+    <i class="glyphicon glyphicon-log-out" style="color:red"></i>&nbsp;
+    <a href="deconnexion" style="color:black;">Deconnexion</a>
+      </div> 
+    </li>
+                     
+            </ul>            
+                        
+                       
+                        
+
+
                     </li>
                 </ul>
             </div>
+            
         </div>
+        
     </nav>
+
     
     <section class="container" id="about" style="background-color:rgba(17,105,142,1); height:50px; margin-top:-50px">
         <div class="container">

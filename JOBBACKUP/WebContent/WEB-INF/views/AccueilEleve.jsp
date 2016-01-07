@@ -59,8 +59,31 @@
                         <label style="color:white; margin-top:12px">JOB<span style="color: SteelBlue ">EISTI</span>  </label>
                     </li>
                     <li>
-                    
-                        <a href="#"><label data-toggle="tooltip" title="Mes options" data-placement="right" ><i class="glyphicon glyphicon-align-justify"></i></label></a>
+               &nbsp;
+                       <button type="button" style="margin-top:10px;font-size: 20px; color:white; background-color:transparent; border:none"  class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown" title="Mes options" >
+                       </button>  <ul class="dropdown-menu">
+    <li>
+    
+    <div style="display: flex; align-content:left ">
+       <i class="glyphicon glyphicon-erase"></i>&nbsp;
+    <a href="motdepasse" style="color:black;">Reinitialiser mot de passe</a>
+    </div>
+    </li>
+    
+    <li>
+    
+     <div style="display: flex; align-content:left ">
+    <i class="glyphicon glyphicon-log-out" style="color:red"></i>&nbsp;
+    <a href="deconnexion" style="color:black;">Deconnexion</a>
+      </div> 
+    </li>
+                     
+            </ul>            
+                        
+                       
+                        
+
+
                     </li>
                 </ul>
             </div>
@@ -142,7 +165,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="favorites" class="portfolio-box">
                         <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
