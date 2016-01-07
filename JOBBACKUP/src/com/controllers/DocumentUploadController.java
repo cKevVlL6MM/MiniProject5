@@ -60,22 +60,24 @@ public class DocumentUploadController {
 	            	Session sessions= sf.openSession();
 	            	
 	            	byte[] bytes=multiFile.getBytes();
-	            	 
-		        	Connection test;
-					try {
-						test = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","JOBEISTI","JOBEISTI");
-						PreparedStatement stmt=test.prepareStatement("insert into TABLE_DOCUMENTS(UPLOAD_ID, FILE_NAME, FILE_DATA) values (SQ_DOC.NEXTVAL,?,?)");
-						stmt.setString(1, multiFile.getOriginalFilename());
-						stmt.setBytes(2, bytes);
-						sessions.getTransaction().begin();
-						stmt.executeUpdate();
-						sessions.getTransaction().commit();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		        
-	                System.out.println(multiFile.getOriginalFilename());
+	            	Query query=sessions.createSQLQuery("Select * From TABLE_DOCUMENTS where FILE_NAME=:FILENAME").setParameter("FILENAME", multiFile.getOriginalFilename());
+	            	if (query.list().isEmpty()) {
+			        	Connection test;
+						try {
+							test = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","JOBEISTI","JOBEISTI");
+							PreparedStatement stmt=test.prepareStatement("insert into TABLE_DOCUMENTS(UPLOAD_ID, FILE_NAME, FILE_DATA) values (SQ_DOC.NEXTVAL,?,?)");
+							stmt.setString(1, multiFile.getOriginalFilename());
+							stmt.setBytes(2, bytes);
+							sessions.getTransaction().begin();
+							stmt.executeUpdate();
+							sessions.getTransaction().commit();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+			        
+		                System.out.println(multiFile.getOriginalFilename());
+	            	}
 		 }
 		
 		return new ModelAndView("FileUpload");
