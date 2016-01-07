@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
     <%@page isELIgnored="false" %> 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -104,7 +104,22 @@
                     
                 </div>
                 <div class="col-lg-8 ">
-              ESPACE ENTREPRISE
+                  <table>
+				   <tr>
+				       <td>Événement</td>
+				       <td>Début</td>
+				       <td>Fin</td>
+				   </tr>
+				<c:if test="${not empty listEvents }">
+				<c:forEach var="i" begin="0" end="${(fn:length(listEvents))-1}" step="1">
+				   <tr>
+					<td><c:out value="${listEvents.get(i).getNomevenement()}"/></td>
+					<td><c:out value="${listEvents.get(i).getDatedebut()}"/></td>
+					<td><c:out value="${listEvents.get(i).getDatefin()}"/></td>
+				   </tr>
+				   </c:forEach>
+				   </c:if>
+			</table>
                     
                     
                 </div>
@@ -165,7 +180,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="documentUpload" class="portfolio-box">
                         <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">

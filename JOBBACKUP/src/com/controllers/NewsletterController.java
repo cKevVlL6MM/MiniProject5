@@ -89,11 +89,12 @@ public class NewsletterController {
 			
 		Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("jobeisti@gmail.com"));
+			if (!liste.isEmpty()) {
 			for (int i=0;i<liste.size();i++) {
 				message.addRecipients(Message.RecipientType.TO,	InternetAddress.parse(liste.get(i)));
 			}
 			message.setSubject("Newsletter du "+date.format(today)+" : "+mail.getSujet());
-			message.setContent(mail.getContenu()+"<br/><img src=\"<c:url value=\"img/LOGO.png\"/>", "text/html; charset=utf-8");
+			message.setContent(mail.getContenu()+"<br/><img src=\"<img src=\"img/LOGO.png\"/>", "text/html; charset=utf-8");
 
 			Transport.send(message);
 			Transaction transac = sessions.beginTransaction();
@@ -105,10 +106,11 @@ public class NewsletterController {
 			query2.executeUpdate();
 			System.out.println("Done");
 			transac.commit();
-
+			}
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+		
 		
 		return new ModelAndView("newsletter");
 		

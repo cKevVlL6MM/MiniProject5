@@ -125,6 +125,18 @@ public static String Redirect(String role, HttpServletRequest request)
 {
 	TableUtilisateurs tu = ProfileUtilisateur.getTableUtilisateur(getUserId());
 	
+	SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
+	Session sessions = sf.openSession();
+	Query query = sessions.createSQLQuery("Select * FROM Table_Evenements WHERE datefin >= sysdate ORDER BY datedebut asc").addEntity(TableEvenements.class);
+	
+	ArrayList<TableEvenements> listEvents = new ArrayList<TableEvenements>();
+	if(!query.list().isEmpty()){
+		for (int i=0;i<query.list().size();i++){
+			listEvents.add((TableEvenements) query.list().get(i));
+		}
+		request.setAttribute("listEvents", listEvents);
+	}
+	
 	
 	//System.out.println(role);
 	if(role.equals(roleEleve))
