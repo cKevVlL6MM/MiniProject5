@@ -37,6 +37,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beans.ProfileUtilisateur;
+
 import hibernate.model.TableDocuments;
 
 @Controller
@@ -57,14 +59,7 @@ public class DocumentUploadController {
 	            	SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 	            	Session sessions= sf.openSession();
 	            	
-	            	 byte[] bytes=multiFile.getBytes();
-	            	 
-	            	
-	            	/*
-	            	 Query query=sessions.createSQLQuery("insert into TABLE_DOCUMENTS(UPLOAD_ID, FILE_NAME, FILE_DATA) values (SQ_DOC.NEXTVAL,:FILENAME,:FILEDATA)");
-		        	query.setParameter("FILENAME",multiFile.getOriginalFilename());
-		        	query.setSerializable("FILEDATA", bytes);
-		        	query.executeUpdate();*/
+	            	byte[] bytes=multiFile.getBytes();
 	            	 
 		        	Connection test;
 					try {
@@ -80,14 +75,20 @@ public class DocumentUploadController {
 						e1.printStackTrace();
 					}
 		        
-		        	
 	                System.out.println(multiFile.getOriginalFilename());
-				
 		 }
-	
-
-		
 		
 		return new ModelAndView("FileUpload");
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	protected ModelAndView uploadDocument(HttpServletRequest request) {
+	ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+	if((pl==null)||(!pl.isAdmin())){
+		return new ModelAndView("Login");
+	}
+	else {
+		return new ModelAndView("FileUpload");
+	}
 	}
 }

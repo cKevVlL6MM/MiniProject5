@@ -106,6 +106,7 @@ public class AnnonceEntrepriseController {
 	@RequestMapping(value="/supAnnonceController",method = RequestMethod.GET)
 	protected ModelAndView supAnnonces (@ModelAttribute("tableoffres")TableOffres offre, ModelMap model,HttpServletRequest request){
 		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		
 		model.addAttribute("tableoffres", offre);
 		@SuppressWarnings("deprecation")
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();

@@ -9,7 +9,6 @@
 <title>Telecharger Documents</title>
 </head>
 <body>
-<form method="get" action="documentDownload" ><input class="btn btn-primary" type="submit" value="Telecharger"/></form>
 <c:if test="${not empty nomsFichiers}">
 <c:forEach var="i" begin="0" end="${(fn:length(nomsFichiers))-1}" step="1">
 <h4><b><c:out value="${nomsFichiers.get(i)}"/></b></h4>

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beans.ProfileUtilisateur;
+
 import hibernate.dao.TableDocumentsHome;
 import hibernate.model.TableDocuments;
 
@@ -30,8 +33,12 @@ import hibernate.model.TableDocuments;
 public class DocumentDownloadController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	protected ModelAndView downloadFile(){
-
+	protected ModelAndView downloadFile(HttpServletRequest request) {
+		ProfileUtilisateur pl = (ProfileUtilisateur)  request.getSession().getAttribute("profileutilisateur");
+		if((pl==null)){
+			return new ModelAndView("Login");
+		}else {
+		
 		SessionFactory sf =  new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 		Session sessions= sf.openSession();
 		Query query=sessions.createSQLQuery("select FILE_NAME from TABLE_DOCUMENTS");
@@ -47,6 +54,8 @@ public class DocumentDownloadController {
 		else {
 			return new ModelAndView("FileDownload");
 		}
+		}
+		
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

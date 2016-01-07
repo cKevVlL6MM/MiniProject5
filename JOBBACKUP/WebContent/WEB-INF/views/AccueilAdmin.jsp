@@ -36,7 +36,9 @@
 <body>
 
 
-
+	<a href="documentUpload">Upload</a>
+	<a href="documentDownload">Download</a>
+	
 
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
