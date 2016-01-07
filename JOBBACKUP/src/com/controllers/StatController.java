@@ -32,6 +32,7 @@ import com.googlecode.charts4j.BarChart;
 import com.googlecode.charts4j.BarChartPlot;
 import com.googlecode.charts4j.Color;
 import com.googlecode.charts4j.Data;
+import com.googlecode.charts4j.DataUtil;
 import com.googlecode.charts4j.Fills;
 import com.googlecode.charts4j.GCharts;
 import com.googlecode.charts4j.LinearGradientFill;
@@ -87,11 +88,11 @@ public class StatController {
 			}
 			
 			//creation diagramme pie pour inscriptions
-			Slice s1 = Slice.newSlice(percentEleve, Color.newColor("CACACA"),"Eleves "+percentEleve+" %");
+			Slice s1 = Slice.newSlice(percentEleve, Color.BEIGE,"Eleves "+percentEleve+" %");
 			Slice s2 = Slice.newSlice(percentEntreprise, Color.newColor("951800"),"Enterprises "+percentEntreprise+" %");
 			PieChart chart = GCharts.newPieChart(s1, s2);
 	        chart.setTitle("Nombre des Inscrits");
-	        chart.setSize(500, 200);
+	        chart.setSize(480, 200);
 	        
 	        
 	        model.addAttribute("nombreOffres", nombreOffres);
@@ -113,7 +114,7 @@ public class StatController {
 			if(!query2.list().isEmpty())
 			{
 				List<Object[]> rows = query2.list();
-				
+				int MaxVal=0;
 				List<List<Integer>> datalist = new ArrayList();
 				List<String> MonthList = new ArrayList();
 				
@@ -131,20 +132,16 @@ public class StatController {
 					List<Integer> dataForOne =new ArrayList();
 				for(int g=0; g<query2.list().size();g++)
 				{
-					dataForOne.add(Integer.parseInt((rows.get(g)[m].toString()) )*10);	
+					dataForOne.add(Integer.parseInt((rows.get(g)[m].toString()) ));	
+					MaxVal=Integer.parseInt((rows.get(g)[m].toString()) )+MaxVal;
 					System.out.println(Integer.parseInt((rows.get(g)[m].toString() )));
 				}
+				
 				datalist.add(dataForOne);
 				}
 				
 				
-				//on cree les datasets pour chaque mois
-				
-				for(int j=0;j<rows.size();j++)
-				{
-					
-					
-				}
+			
 				
 				
 				
@@ -163,8 +160,12 @@ public class StatController {
 				 Nombre.setAxisStyle(axisStyle);
 				 Mois.setAxisStyle(axisStyle);
 				 
+				 
+				 
+				 
+				 
 				 chartHistoriques.addXAxisLabels(AxisLabelsFactory.newAxisLabels(MonthList));
-				 chartHistoriques.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 10, 1));
+				 chartHistoriques.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0,10,2));
 				 chartHistoriques.addYAxisLabels(Nombre);
 				 chartHistoriques.addXAxisLabels(Mois);
 
