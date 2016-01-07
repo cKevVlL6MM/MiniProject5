@@ -260,6 +260,19 @@
 									<img src="img/calendar68.png" alt="logoDate" class="logoPNGannonce" style="width:15px; height: 15px;float: left;margin-left: 20px;margin-right: 10px;">
 									<c:out value="${listeAnnonces.get(i).getOffre().getDatepublication()}"/>
 								</div>
+								
+								
+								<div class="alignement_bloc" style="display: inline-block;">
+									<i class="glyphicon glyphicon-earphone" style="margin-left: 20px;margin-right: 10px;"></i>
+									<c:out value="${listeAnnonces.get(i).getEnterprise().getTelephone()}"/>
+								</div>
+								
+								<div class="alignement_bloc" style="display: inline-block;">
+									<i class="glyphicon glyphicon-envelope" style="margin-left: 20px;margin-right: 10px;"></i>
+									<c:out value="${listeAnnonces.get(i).getEnterprise().getEmail()}"/>
+								</div>
+								
+								
 							</div>
 						
 						
