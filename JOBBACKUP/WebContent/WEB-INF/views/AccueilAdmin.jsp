@@ -224,7 +224,7 @@
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
                     <a href="documentDownload" class="portfolio-box">
-                        <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
+                        <img src="<c:url value="img/Download.png"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -239,7 +239,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="documentUpload" class="portfolio-box">
-                        <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Upload.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -254,7 +254,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="stat" class="portfolio-box">
-                        <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Statistiques.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
