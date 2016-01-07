@@ -35,10 +35,8 @@
 
 <body>
 
-<a href="addEvent">ajoutEvent</a>
-<a href="stat">Statistique</a>
-	<a href="documentUpload">Upload</a>
-	<a href="documentDownload">Download</a>
+
+
 	
 
     
@@ -175,7 +173,7 @@
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
                     <a href="newsletter" class="portfolio-box">
-                        <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
+                        <img src="<c:url value="img/Newsletter.png"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -190,11 +188,11 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="gererAnnonceAdmin" class="portfolio-box">
-                        <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Annonce.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    
+                                  Annonces  
                                 </div>
                                 <div class="project-name">
                                   Gerer les annonces
@@ -205,7 +203,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="addEvent" class="portfolio-box">
-                        <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Evenement.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -213,6 +211,57 @@
                                 </div>
                                 <div class="project-name">
                                   Ajouter des evenements
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section><br/>
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="documentDownload" class="portfolio-box">
+                        <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                   Documents
+                                </div>
+                                <div class="project-name">
+                                   Télécharger des documents
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="documentUpload" class="portfolio-box">
+                        <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                 Documents   
+                                </div>
+                                <div class="project-name">
+                                  Ajouter des documents
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="stat" class="portfolio-box">
+                        <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                   Statistiques 
+                                </div>
+                                <div class="project-name">
+                                  Consulter les statistiques
                                 </div>
                             </div>
                         </div>

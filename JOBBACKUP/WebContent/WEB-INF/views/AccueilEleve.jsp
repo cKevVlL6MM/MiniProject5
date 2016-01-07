@@ -170,7 +170,7 @@
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
                     <a href="annonces" class="portfolio-box">
-                        <img src="<c:url value="img/bworld.jpg"/>" class="img-responsive" alt=""/>
+                        <img src="<c:url value="img/Annonce.png"/>" class="img-responsive" alt=""/>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="favorites" class="portfolio-box">
-                        <img src="<c:url value="img/myads.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Archive.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -200,11 +200,11 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <a href="documentDownload" class="portfolio-box">
-                        <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
+                        <img src="<c:url value="img/Download.png"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                   DOWNLOAD
+                                   Documents
                                 </div>
                                 <div class="project-name">
                                   Télécharger des documents
