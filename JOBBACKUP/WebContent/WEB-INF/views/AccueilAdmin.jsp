@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
     <%@page isELIgnored="false" %> 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,6 +35,7 @@
 
 <body>
 
+<a href="addEvent">chibre</a>
 
 	<a href="documentUpload">Upload</a>
 	<a href="documentDownload">Download</a>
@@ -107,7 +108,20 @@
                     
                 </div>
                 <div class="col-lg-8 ">
-               Réservé : Actu
+              <table>
+				   <tr>
+				       <td>Événement</td>
+				       <td>Début</td>
+				       <td>Fin</td>
+				   </tr>
+				<c:forEach var="i" begin="0" end="${(fn:length(listEvents))-1}" step="1">
+				   <tr>
+					<td><c:out value="${listEvents.get(i).getNomevenement()}"/></td>
+					<td><c:out value="${listEvents.get(i).getDatedebut()}"/></td>
+					<td><c:out value="${listEvents.get(i).getDatefin()}"/></td>
+				   </tr>
+				   </c:forEach>
+			</table>
                     
                     
                 </div>
