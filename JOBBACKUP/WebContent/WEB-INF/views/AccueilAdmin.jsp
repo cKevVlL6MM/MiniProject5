@@ -108,8 +108,8 @@
                     
                 </div>
                 <div class="col-lg-8 ">
-              <table>
-				   <tr>
+              <table class="table table-hover">
+				   <tr class="warning">
 				       <td>Événement</td>
 				       <td>Début</td>
 				       <td>Fin</td>
@@ -123,10 +123,15 @@
 				   </tr>
 				   </c:forEach>
 				   </c:if>
+				   <c:if test="${empty listEvents }">
+				   <tr><td colspan=3>Aucun evenement de prevu</td></tr>
+				   </c:if>
+				   
 			</table>
                     
                     
-                </div>
+         
+      </div>
                
             </div>
         </div>
