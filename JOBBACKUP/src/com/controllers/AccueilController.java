@@ -39,15 +39,15 @@ public class AccueilController {
 		}
 		
 		
-		if(pl.isEleve())
+		if(pl!=null && pl.isEleve())
 		{
 			return "AccueilEleve";
 		}
-		else if(pl.isAdmin())
+		else if(pl!=null && pl.isAdmin())
 		{
 			return "AccueilAdmin";
 		}
-		else if(pl.isEnterprise())
+		else if(pl!=null && pl.isEnterprise())
 		{
 			return "AccueilEntreprises";
 		}
