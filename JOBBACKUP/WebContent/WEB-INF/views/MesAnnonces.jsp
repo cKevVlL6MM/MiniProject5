@@ -176,13 +176,13 @@ $("#canceller").on('click', (function(){
 			<c:if test="${valeur==listeOffres.get(i).getIdoffre()}">	
 				<form action="modifAnnonceController" method="post">
 					<label for="titreoffre">Titre</label><br/>
-					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" /><br/>
+					<input type="text" name="titreoffre" id="titreoffre" tabindex="1" class="form-control" value="${listeOffres.get(i).getTitreoffre()}"/><br/>
 					<label for="contenu">Contenu de l'annonce</label><br/>
-					<textarea name="contenu" rows="5" cols="50"></textarea><br/>
+					<textarea name="contenu" rows="5" cols="50">${listeOffres.get(i).getContenu()}</textarea><br/>
 					<label for="dureeoffre">Fin de l'offre</label><br/>
-					<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy" /><br/>
+					<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="${listeOffres.get(i).getDureeoffre()}" /><br/>
 					<label for="idtypecontrat">Type de Contrat</label><br/>
-					<select class="form-control" id="idtypecontrat" name="idtypecontrat">
+					<select class="form-control" id="idtypecontrat" name="idtypecontrat" >
 												<option value="-1"></option>
 												<option value="5">Stage</option>
 												<option value="3">Alternance</option>
@@ -194,7 +194,7 @@ $("#canceller").on('click', (function(){
 											<br/>
 					<label for="idniveauminimum">Promotion ciblée</label>
 					<br/>
-					<select name="idniveauminimum" size="1" required>
+					<select name="idniveauminimum" size="1" required >
 						<OPTION value="1">cpi1
 						<OPTION value="2">cpi2
 						<OPTION value="3">ing1
