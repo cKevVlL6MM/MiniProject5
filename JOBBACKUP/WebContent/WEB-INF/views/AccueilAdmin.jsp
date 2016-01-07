@@ -204,7 +204,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="addEvent" class="portfolio-box">
                         <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -212,7 +212,7 @@
                                     Actualité et événements 
                                 </div>
                                 <div class="project-name">
-                                  Ajouter des news ou des documents
+                                  Ajouter des evenements
                                 </div>
                             </div>
                         </div>

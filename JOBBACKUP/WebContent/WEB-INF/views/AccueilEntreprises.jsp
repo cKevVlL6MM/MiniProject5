@@ -189,7 +189,7 @@
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    MyJOBEisti
+                                   Documents
                                 </div>
                                 <div class="project-name">
                                    Ajouter des documents

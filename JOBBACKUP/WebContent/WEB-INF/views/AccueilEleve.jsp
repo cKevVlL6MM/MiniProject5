@@ -192,22 +192,22 @@
                                     MyJOBEisti
                                 </div>
                                 <div class="project-name">
-                                   Consultez vos annonces archivées
+                                   Consultez vos annonces épinglées
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
+                    <a href="documentDownload" class="portfolio-box">
                         <img src="<c:url value="img/actualite.jpg"/>" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Actualité et événements 
+                                   DOWNLOAD
                                 </div>
                                 <div class="project-name">
-                                   Suivez les événements de nos partenaires 
+                                  Télécharger des documents
                                 </div>
                             </div>
                         </div>
