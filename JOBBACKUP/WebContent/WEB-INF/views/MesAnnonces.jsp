@@ -222,7 +222,7 @@ $("#canceller").on('click', (function(){
 	</div>
 	
 	
-	</div>
+	
 	
 	
 	<div class="panel panel-warning" id="inserer" style="width:500px">  
@@ -263,8 +263,8 @@ $("#canceller").on('click', (function(){
 	
 	</div>
 	
+	</div>
+	</div>
 	
-	</div>
-	</div>
 </body>
 </html>
