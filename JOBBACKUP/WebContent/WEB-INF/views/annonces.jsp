@@ -135,8 +135,8 @@
 							<div class="critere-recherche">
 								
 								
-								<label for="datepublication">Date publication</label><br/>
-		<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy">
+								<label for="datepublication" style="color:white;">Date publication</label><br/>
+		<input type="text" name="datepublication" id="datepublication" tabindex="1" class="form-control" value="dd/mm/yyyy">
 								
 								
 								
@@ -146,7 +146,7 @@
 
 							<div class="critere-recherche">
 								
-								<label for="dureeoffre">Fin de l'offre</label><br/>
+								<label for="dureeoffre" style="color:white;">Fin de l'offre</label><br/>
 		<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy">
 							</div>
 							

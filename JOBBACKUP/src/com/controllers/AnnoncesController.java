@@ -283,7 +283,7 @@ public class AnnoncesController {
 		
 		
 		int inm = search.getIdniveauminimum();
-		inm=-1;
+		
 		int itc = search.getIdtypecontrat();
 		int its = search.getIdtypesecteur();
 		Date dc = search.getDatepublication();
@@ -371,7 +371,7 @@ public class AnnoncesController {
 			
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DATEPUBLICATION = :dc ")
 					.addEntity(TableOffres.class)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 		
@@ -380,7 +380,7 @@ public class AnnoncesController {
 		{
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DUREEOFFRE = :dd ")
 					.addEntity(TableOffres.class)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 		}
@@ -426,7 +426,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE  = :to and DATEPUBLICATION = :dc ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 			
@@ -439,7 +439,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE  = :to and DUREEOFFRE = :dd ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());
 			
@@ -477,7 +477,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDNIVEAUMINIMUM  = :inm and DATEPUBLICATION = :dc")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -488,7 +488,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDNIVEAUMINIMUM  = :inm and DUREEOFFRE = :dd")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -512,7 +512,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPECONTRAT = :itc and DATEPUBLICATION = :dc")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", bitc)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -524,7 +524,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPECONTRAT = :itc and DUREEOFFRE = :dd")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", bitc)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -536,7 +536,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPESECTEUR = :its and  DATEPUBLICATION = :dc")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -548,7 +548,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPESECTEUR = :its and  DUREEOFFRE = :dd")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -559,8 +559,8 @@ public class AnnoncesController {
 			
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DATEPUBLICATION = :dc and  DUREEOFFRE = :dd")
 					.addEntity(TableOffres.class)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd);
+					.setDate("dc", dc)
+					.setDate("dd", dd);
 					
 					listeOffres= fill  (query.<TableOffres>list());	
 		}
@@ -612,7 +612,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -628,7 +628,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -664,7 +664,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
 					.setParameter("itc", bitc)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -682,7 +682,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
 					.setParameter("itc", bitc)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -701,7 +701,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("itc", bitc)
 					.setParameter("its", bits)
-					.setParameter("dc", dc);
+					.setDate("dc", dc);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -720,7 +720,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("itc", bitc)
 					.setParameter("its", bits)
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -756,8 +756,8 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPESECTEUR = :its  and DATEPUBLICATION = :dc and DUREEOFFRE = :dd ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd);
+					.setDate("dc", dc)
+					.setDate("dd", dd);
 				
 					
 					listeOffres= fill  (query.<TableOffres>list());	
@@ -774,7 +774,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPESECTEUR = :its  and DATEPUBLICATION = :dc and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("inm", binm);
 				
 					
@@ -792,7 +792,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where IDTYPESECTEUR = :its  and DATEPUBLICATION = :dc and TITREOFFRE = :to ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to", to);
 				
 					
@@ -807,8 +807,8 @@ public class AnnoncesController {
 			
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DATEPUBLICATION = :dc and DUREEOFFRE = :dd and TITREOFFRE = :to ")
 					.addEntity(TableOffres.class)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd)
+					.setDate("dc", dc)
+					.setDate("dd", dd)
 					.setParameter("to", to);
 			
 				
@@ -827,8 +827,8 @@ public class AnnoncesController {
 			
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DATEPUBLICATION = :dc and DUREEOFFRE = :dd and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd)
+					.setDate("dc", dc)
+					.setDate("dd", dd)
 					.setParameter("inm", binm);
 			
 				
@@ -847,8 +847,8 @@ public class AnnoncesController {
 			
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DATEPUBLICATION = :dc and DUREEOFFRE = :dd and IDTYPECONTRAT = :itc ")
 					.addEntity(TableOffres.class)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd)
+					.setDate("dc", dc)
+					.setDate("dd", dd)
 					.setParameter("itc", bitc);
 			
 				
@@ -868,7 +868,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE = :to and DUREEOFFRE = :dd and IDTYPECONTRAT = :itc ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("itc", bitc);
 			
 				
@@ -888,7 +888,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE = :to and DUREEOFFRE = :dd and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("its", bits);
 			
 				
@@ -931,7 +931,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("itc", bitc);
 			
 				
@@ -952,7 +952,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("to", to)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("itc", bitc);
 			
 				
@@ -973,7 +973,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("itc", bitc);
 			
 				
@@ -994,7 +994,7 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("itc", bitc);
 			
 				
@@ -1014,8 +1014,8 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where DUREEOFFRE= :dd and DATEPUBLICATION = :dc and IDTYPECONTRAT = :itc and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
-					.setParameter("dd", dd)
+					.setDate("dc", dc)
+					.setDate("dd", dd)
 					.setParameter("itc", bitc);
 			
 				
@@ -1035,7 +1035,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to and DATEPUBLICATION = :dc and IDTYPECONTRAT = :itc and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to","%"+ to+"%")
 					.setParameter("itc", bitc);
 			
@@ -1056,9 +1056,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to and DATEPUBLICATION = :dc and DUREEOFFRE = :dd and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 			
 				
 					
@@ -1076,9 +1076,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to and DATEPUBLICATION = :dc and DUREEOFFRE = :dd and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 			
 				
 					
@@ -1096,9 +1096,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery(" select * from Table_offres where TITREOFFRE LIKE :to and DATEPUBLICATION = :dc and DUREEOFFRE = :dd and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dd", dd);
+					.setDate("dd", dd);
 			
 				
 					
@@ -1118,7 +1118,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where TITREOFFRE LIKE :to and DATEPUBLICATION = :dc and IDTYPESECTEUR = :its and IDTYPECONTRAT = :itc and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("to","%"+ to+"%")
 					.setParameter("its", bits)
 					.setParameter("itc", bitc);
@@ -1141,7 +1141,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where DUREEOFFRE = :dd and DATEPUBLICATION = :dc and IDTYPESECTEUR = :its and IDTYPECONTRAT = :itc and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("dd",dd)
 					.setParameter("its", bits)
 					.setParameter("itc", bitc);
@@ -1164,7 +1164,7 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where TITREOFFRE LIKE :to and DUREEOFFRE = :dd and IDTYPESECTEUR = :its and IDTYPECONTRAT = :itc and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("to","%"+ to+"%")
 					.setParameter("its", bits)
 					.setParameter("itc", bitc);
@@ -1187,9 +1187,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where TITREOFFRE LIKE :to and DUREEOFFRE = :dd and DATEPUBLICATION = :dc and IDTYPECONTRAT = :itc and IDNIVEAUMINIMUM = :inm ")
 					.addEntity(TableOffres.class)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("itc", bitc);
 			
 				
@@ -1210,9 +1210,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where TITREOFFRE LIKE :to and DUREEOFFRE = :dd and DATEPUBLICATION = :dc and IDTYPECONTRAT = :itc and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("itc", bitc);
 			
 				
@@ -1233,9 +1233,9 @@ public class AnnoncesController {
 			Query query=sessions.createSQLQuery("select * from Table_offres where TITREOFFRE LIKE :to and DUREEOFFRE = :dd and DATEPUBLICATION = :dc and IDNIVEAUMINIMUM = :inm and IDTYPESECTEUR = :its ")
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("inm", binm);
 			
 				
@@ -1257,9 +1257,9 @@ public class AnnoncesController {
 					.addEntity(TableOffres.class)
 					.setParameter("its", bits)
 					.setParameter("inm", binm)
-					.setParameter("dd", dd)
+					.setDate("dd", dd)
 					.setParameter("to","%"+ to+"%")
-					.setParameter("dc", dc)
+					.setDate("dc", dc)
 					.setParameter("itc", bitc);
 			
 				
