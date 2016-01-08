@@ -249,12 +249,14 @@ public class AnnoncesController {
 				
 				return new ModelAndView("annonces","listeAnnonces",listeAnnonces);
 				}
+			
+			else
+			{
+				return new ModelAndView("annonces");
+			}	
 	
 		}
-		else
-		{
-			return new ModelAndView("annonces");
-		}
+		
 		return new ModelAndView("Login");
 		}
 	
