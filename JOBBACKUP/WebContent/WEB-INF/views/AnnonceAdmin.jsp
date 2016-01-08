@@ -49,9 +49,32 @@
                     <li>
                         <label style="color:white; margin-top:12px">JOB<span style="color: SteelBlue ">EISTI</span>  </label>
                     </li>
-                    <li>
-                    
-                        <a href="#"><label data-toggle="tooltip" title="Mes options" data-placement="right" ><i class="glyphicon glyphicon-align-justify"></i></label></a>
+                     <li>
+               &nbsp;
+                       <button type="button" style="margin-top:10px;font-size: 20px; color:white; background-color:transparent; border:none"  class="glyphicon glyphicon-align-justify dropdown-toggle" data-toggle="dropdown" title="Mes options" >
+                       </button> <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+						    <li style="height: 30px;">
+						    
+						    <div style="display: flex; margin:10px " class="" >
+						        <i class="glyphicon glyphicon-erase"></i>&nbsp;
+						    	<a href="motdepasse" style="color:black;font-family: Helvetica Neue,Helvetica,Arial,sans-serif; margin-left:10px">Reinitialiser mot de passe</a>
+						    </div>
+						    </li>
+						    
+						    <li style="height: 30px; text-align: center; vertical-align:middle">
+						    
+						     <div style="display: flex; margin:10px" class="">
+							    <i class="glyphicon glyphicon-log-out" style="color:red"></i>&nbsp;
+							    <a href="deconnexion" style="color:black; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; margin-left:10px">Deconnexion</a>
+						      </div> 
+						    </li>
+				                     
+				       </ul>            
+                        
+                       
+                        
+
+
                     </li>
                 </ul>
             </div>
