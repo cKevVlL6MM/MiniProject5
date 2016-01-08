@@ -104,7 +104,7 @@ public class StatController {
 	        
 	        //stat mois par mois
 
-			Query query2=sessions.createSQLQuery("select to_char(DATESTAT,'Mon-yyyy') \"Date\", MAX(NOMBREOFFRES) \"NombreOffres\", MAX(NOMBREELEVES) \"NombreEleves\", MAX(NOMBREENTREPRISE) \"NombreEntreprises\", MAX(NOMBREINSCRITS) as \"NombreInscrits\"  from TABLE_STATISTIQUE group by to_char(DATESTAT,'Mon-yyyy') order by to_char(DATESTAT,'Mon-yyyy') ")
+			Query query2=sessions.createSQLQuery("select to_char(t1.DATESTAT,'Mon-yyyy') \"Date\", t1.NOMBREOFFRES \"NombreOffres\", t1.NOMBREELEVES \"NombreEleves\", t1.NOMBREENTREPRISE \"NombreEntreprises\", t1.NOMBREINSCRITS  \"NombreInscrits\"  from TABLE_STATISTIQUE t1 RIGHT JOIN (SELECT MAX(IDLIGNESTAT) IDLIGNESTAT FROM TABLE_STATISTIQUE GROUP BY to_char(DATESTAT,'Mon-yyyy')) t0 on t1.IDLIGNESTAT=t0.IDLIGNESTAT ")
 					.addScalar("NombreInscrits", LongType.INSTANCE)
 					.addScalar("NombreOffres", LongType.INSTANCE)
 					.addScalar("NombreEleves", LongType.INSTANCE)
@@ -129,6 +129,7 @@ public class StatController {
 				
 				
 				
+				// 4 : represente les differents nombres : nombre inscrits, nombre entreprise, c'est un parametre fixe
 				for(int m=0;m<4;m++)
 				{
 					List<Integer> dataForOne =new ArrayList();
