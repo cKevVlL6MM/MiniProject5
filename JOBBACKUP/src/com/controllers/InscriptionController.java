@@ -49,7 +49,7 @@ public class InscriptionController  {
 		//SessionFactory sessionFactory = createSessionFactory();
 		Session sessions= sf.openSession();
 		Query querytestEleve=sessions.createSQLQuery("select count(*) from Table_Eleve where email='"+user.getEmail()+"'");
-		Query querytestEntreprise=sessions.createSQLQuery("select count(*) from Table_Entreprise where email='"+user.getEmail()+"'");
+		Query querytestEntreprise=sessions.createSQLQuery("select count(*) from Table_Entreprises where email='"+user.getEmail()+"'");
 		BigDecimal test;
 		if((user.getFax()=="")&&(user.getPrenom()!="")){
 			test=(BigDecimal) querytestEleve.uniqueResult();
@@ -95,7 +95,7 @@ public class InscriptionController  {
 			}
 			
 		}
-		else if((user.getAdresse()!=null)&&(user.getPrenom()==null)) {
+		else if((user.getAdresse()!="")&&(user.getPrenom()=="")) {
 			test=(BigDecimal) querytestEntreprise.uniqueResult();
 			if(test.intValue()<1){
 			int type;
