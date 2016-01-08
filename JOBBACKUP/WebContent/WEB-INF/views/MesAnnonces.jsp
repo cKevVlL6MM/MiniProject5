@@ -128,21 +128,16 @@ $("#canceller").on('click', (function(){
 
 
 
-
-	<c:if test="${not empty listeOffres}">
-	
-	<div class="panel panel-primary" style="width:1000px; margin:10px ">
+<div class="panel panel-primary" style="width:1000px; margin:10px ">
 	<div class="panel panel-heading">Annonces <div class="pull-right"> 
 	
+
+	     <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button> </div>    </div>
 	
 	
-	
-	
-	
-	
-	
-	
-	     <button style="background:transparent; border:none; " id="ajouter" data-toggle="tooltip"  title="Ajouter une nouvelle annonce" > <i class="glyphicon glyphicon-plus"></i>    </button>  </div>   </div>
+
+
+	<c:if test="${not empty listeOffres}">
 	
 	
 		
@@ -212,16 +207,22 @@ $("#canceller").on('click', (function(){
 			</div>
 	 	</c:forEach> 
 	 	
-	 	</div>
+	 	
 	 	
 	 	
 	 	
 	</c:if>
+	
 	<c:if test="${empty listeOffres }">
-	
+	<div class="panel-body">
 		<h3 style="text-align: center">Il n'y a pas d'annonce enregistrée</h3>
+		</div>
 	</c:if>
 	
+	</div>
+	
+	
+	</div>
 	
 	
 	<div class="panel panel-warning" id="inserer" style="width:500px">  
