@@ -105,10 +105,10 @@
                 </div>
                 <div class="col-lg-8 ">
                <table class="table table-hover">
-				   <tr class="warning">
-				       <td>Événement</td>
-				       <td>Début</td>
-				       <td>Fin</td>
+				   <tr class="warning" style="background:rgba(17, 105, 142, 1)">
+				       <td style="background:rgba(17, 105, 142, 0.15); color:white">Événement</td>
+				       <td style="background:rgba(17, 105, 142, 0.15); color:white">Début</td>
+				       <td style="background:rgba(17, 105, 142, 0.15); color:white">Fin</td>
 				   </tr>
 				   <c:if test="${not empty listEvents }">
 				<c:forEach var="i" begin="0" end="${(fn:length(listEvents))-1}" step="1">
