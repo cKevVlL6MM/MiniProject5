@@ -282,6 +282,7 @@ public class AnnoncesController {
 		}
 		
 		
+		
 		int inm = search.getIdniveauminimum();
 		
 		int itc = search.getIdtypecontrat();

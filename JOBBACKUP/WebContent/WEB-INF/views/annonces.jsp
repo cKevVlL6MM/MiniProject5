@@ -132,32 +132,19 @@
 							<script src="Bootstrap/jquery.js"></script>
 							<script src="Bootstrap/jquery-ui.js"></script>
 							
-							<div class="critere-recherche">
-								
-								
-								<label for="datepublication" style="color:white;">Date publication</label><br/>
-		<input type="text" name="datepublication" id="datepublication" tabindex="1" class="form-control" value="dd/mm/yyyy">
-								
-								
-								
-							</div>
-							<br/>
+							
+							
 
 
-							<div class="critere-recherche">
-								
-								<label for="dureeoffre" style="color:white;">Fin de l'offre</label><br/>
-		<input type="text" name="dureeoffre" id="dureeoffre" tabindex="1" class="form-control" value="dd/mm/yyyy">
-							</div>
 							
 							 
-							
+						
 							<br/> 
 							
 							
 							 <div class="critere-recherche">
 								
-								<label class="side-search-label" for="titreoffre" style="color:white;">Mots-clés</label>
+								<label class="side-search-label" for="titreoffre" style="color:white;">Titre de l'offre</label>
 								<input class="form-control" id="titreoffre" name="titreoffre" placeholder="Compétences, poste ..." type="text" style="width:250px">
 							</div>
 
